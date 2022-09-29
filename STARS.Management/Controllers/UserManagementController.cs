@@ -20,7 +20,7 @@ namespace STARS.Management.Controllers
             _lDAPService = lDAPService;
         }
 
-        [HttpGet(Name = "GetUserDetails/{username}/")]
+        [HttpGet(Name = "GetUserDetails/{username}")]
         public ActionResult Get([FromRoute] string username)
         {
             _lDAPService.GetUserFromAD(username,false);

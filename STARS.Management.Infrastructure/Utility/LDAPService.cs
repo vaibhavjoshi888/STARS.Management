@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 namespace STARS.Management.Infrastructure.Utility;
 public class LDAPService :ILDAPService
 {
-    DirectorySearcher search;
+    private readonly DirectorySearcher search;
     public LDAPService()
     {
         string ldapConnection = ConfigurationManager.AppSettings.Get("LdapConnection");
