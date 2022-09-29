@@ -2,17 +2,13 @@
 using STARS.Management.Core.Interface;
 using STARS.Management.Core.Models;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.DirectoryServices;
 using System.DirectoryServices.AccountManagement;
-using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace STARS.Management.Infrastructure.Utility;
 public class LDAPService :ILDAPService
 {
-    private readonly DirectorySearcher search;
+    private  DirectorySearcher search;
     public LDAPService(IOptions<LDAPContext> lDapContext)
     {
         string ldapConnection = lDapContext.Value.Server;
@@ -118,6 +114,7 @@ public class LDAPService :ILDAPService
 
         return isValidUser;
     }
+
     public string GetUserFullName(string corpUserID)
     {
         string userFullName = string.Empty;

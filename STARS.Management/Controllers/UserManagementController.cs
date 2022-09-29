@@ -11,16 +11,16 @@ namespace STARS.Management.Controllers
     [Route("[controller]")]
     public class UserManagementController : ControllerBase
     {
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<UserManagementController> _logger;
         private readonly ILDAPService _lDAPService;
-        public UserManagementController(ILogger<WeatherForecastController> logger, ILDAPService lDAPService)
+        public UserManagementController(ILogger<UserManagementController> logger, ILDAPService lDAPService)
         {
             _logger = logger;
             _lDAPService = lDAPService;
         }
 
-        [HttpGet(Name = "GetUserDetails/{username}")]
-        public ActionResult Get([FromRoute] string username)
+        [HttpGet(Name = "getuserdetails/{username}")]
+        public ActionResult Get(string username)
         {
             _lDAPService.GetUserFromAD(username,false);
 
