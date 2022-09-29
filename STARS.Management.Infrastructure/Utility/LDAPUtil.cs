@@ -3,21 +3,20 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.DirectoryServices;
-using System.DirectoryServices.ActiveDirectory;
-using System.Globalization;
+using System.DirectoryServices.AccountManagement;
 using System.Linq;
 using System.Text.RegularExpressions;
-
 
 namespace STARS.Management.Infrastructure.Utility;
 public class LDAPUtil
 {
+    // private readonly ILogger<LDAPUtil> _logger;
     public LDAPUtil()
     {
 
     }
 
-    public  ADUser GetUserFromAD(string userNameOrEmail, bool isEmail)
+    public ADUser GetUserFromAD(string userNameOrEmail, bool isEmail)
     {
         string ldapConnection = ConfigurationManager.AppSettings.Get("LdapConnection");
 
@@ -90,6 +89,142 @@ public class LDAPUtil
         return adUser;
     }
 
+    public bool IsValidADUser(string corpUserId, string pwd)
+    {
+        bool isValidUser = false;
+
+        try
+        {
+            string corpUserName = string.Empty;
+
+            if (corpUserId.ToLower().Contains("corp\\"))
+                corpUserName = corpUserId.ToLower().Replace("corp\\", "");
+            else
+                corpUserName = corpUserId;
 
 
+            using (PrincipalContext pc = new PrincipalContext(ContextType.Domain, "CORP"))
+            {
+                // validate the credentials
+                isValidUser = pc.ValidateCredentials(corpUserName.Trim(), pwd.Trim(), ContextOptions.Negotiate);
+            }
+        }
+        catch (Exception)
+        {
+            throw new Exception("An error occurred while validating user credential.");
+        }
+
+
+        return isValidUser;
+    }
+    public string GetUserFullName(string corpUserID)
+    {
+        string userFullName = string.Empty;
+        string inputUserNameOrEmail = corpUserID.Trim();
+        ADUser userInfo;
+        string corpUserName = string.Empty;
+
+        if (corpUserID.ToLower().Contains("corp\\"))
+            corpUserName = corpUserID.ToLower().Replace("corp\\", "");
+        else
+            corpUserName = corpUserID;
+
+        userInfo = GetUserFromAD(corpUserName, false);
+
+
+        if (userInfo != null)
+        {
+            userFullName = userInfo.FullName;
+        }
+
+        userFullName = (String.IsNullOrWhiteSpace(userFullName)) ? corpUserID : userFullName;
+
+        return userFullName;
+    }
+
+    public string GetUserEmail(string corpUserID)
+    {
+        string userEmail = string.Empty;
+        string inputUserNameOrEmail = corpUserID.Trim();
+        ADUser userInfo;
+        string corpUserName = string.Empty;
+
+        if (corpUserID.ToLower().Contains("corp\\"))
+            corpUserName = corpUserID.ToLower().Replace("corp\\", "");
+        else
+            corpUserName = corpUserID;
+
+        userInfo = GetUserFromAD(corpUserName, false);
+
+
+        if (userInfo != null)
+        {
+            userEmail = userInfo.Email;
+        }
+
+
+
+        return userEmail;
+    }
+
+    public Tuple<bool, ADUser> ValidateAndGetADUser(string corpUserId, string pwd)
+    {
+        ADUser adUser = new ADUser();
+        bool isValidUser = false;
+
+        try
+        {
+            string corpUserName = string.Empty;
+
+            if (corpUserId.ToLower().Contains("corp\\"))
+                corpUserName = corpUserId.ToLower().Replace("corp\\", "");
+            else
+                corpUserName = corpUserId;
+
+
+            using (PrincipalContext pc = new PrincipalContext(ContextType.Domain, "CORP"))
+            {
+                // validate the credentials
+                isValidUser = pc.ValidateCredentials(corpUserName.Trim(), pwd.Trim(), ContextOptions.Negotiate);
+
+                if (isValidUser == true)
+                {
+                    adUser = GetUserFromAD(corpUserName, false);
+                }
+            }
+        }
+        catch (Exception)
+        {
+            throw new Exception("An error occurred while validating user credential.");
+        }
+
+
+        return Tuple.Create<bool, ADUser>(isValidUser, adUser);
+    }
+
+    public ADUser GetManagerInfo(string managerStr)
+    {
+        ADUser manager = new ADUser();
+
+        if (!string.IsNullOrEmpty(managerStr))
+        {
+            try
+            {
+                if (managerStr.Contains(",") && managerStr.Contains("CN="))
+                {
+                    string[] mgrAttr = managerStr.Split(',');
+                    string managerCN = mgrAttr[0].ToString().Split('=')[1].ToString();
+                    manager = GetUserFromAD(managerCN, false);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        return manager;
+    }
 }
+
+
