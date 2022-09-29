@@ -1,0 +1,12 @@
+C:\Users\user\source\repos\STARS.Management\STARS.Management.Core\bin\Debug\net6.0\STARS.Management.Core.deps.json
+C:\Users\user\source\repos\STARS.Management\STARS.Management.Core\bin\Debug\net6.0\STARS.Management.Core.dll
+C:\Users\user\source\repos\STARS.Management\STARS.Management.Core\bin\Debug\net6.0\STARS.Management.Core.pdb
+C:\Users\user\source\repos\STARS.Management\STARS.Management.Core\obj\Debug\net6.0\STARS.Management.Core.csproj.AssemblyReference.cache
+C:\Users\user\source\repos\STARS.Management\STARS.Management.Core\obj\Debug\net6.0\STARS.Management.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\source\repos\STARS.Management\STARS.Management.Core\obj\Debug\net6.0\STARS.Management.Core.AssemblyInfoInputs.cache
+C:\Users\user\source\repos\STARS.Management\STARS.Management.Core\obj\Debug\net6.0\STARS.Management.Core.AssemblyInfo.cs
+C:\Users\user\source\repos\STARS.Management\STARS.Management.Core\obj\Debug\net6.0\STARS.Management.Core.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\STARS.Management\STARS.Management.Core\obj\Debug\net6.0\STARS.Management.Core.dll
+C:\Users\user\source\repos\STARS.Management\STARS.Management.Core\obj\Debug\net6.0\refint\STARS.Management.Core.dll
+C:\Users\user\source\repos\STARS.Management\STARS.Management.Core\obj\Debug\net6.0\STARS.Management.Core.pdb
+C:\Users\user\source\repos\STARS.Management\STARS.Management.Core\obj\Debug\net6.0\ref\STARS.Management.Core.dll
