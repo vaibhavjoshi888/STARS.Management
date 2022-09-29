@@ -4,5 +4,5 @@ namespace STARS.Management.Core.Interface;
 
 public interface ILDAPService
 {
-ADUser GetUserFromAD(string userNameOrEmail, bool isEmail);
+    ADUser GetUserFromAD(string userNameOrEmail, bool isEmail);
 }

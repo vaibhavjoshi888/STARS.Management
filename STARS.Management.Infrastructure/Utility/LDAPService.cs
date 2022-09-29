@@ -11,20 +11,19 @@ using System.Text.RegularExpressions;
 namespace STARS.Management.Infrastructure.Utility;
 public class LDAPService :ILDAPService
 {
-    // private readonly ILogger<LDAPService> _logger;
+    DirectorySearcher search;
     public LDAPService()
     {
-
+        string ldapConnection = ConfigurationManager.AppSettings.Get("LdapConnection");
+        DirectoryEntry dEntry = new DirectoryEntry(ldapConnection);
+        search = new DirectorySearcher(dEntry);
     }
 
     public ADUser GetUserFromAD(string userNameOrEmail, bool isEmail)
     {
-        string ldapConnection = ConfigurationManager.AppSettings.Get("LdapConnection");
-
+        
         ADUser adUser = new ADUser();
         SearchResultCollection resultList = null;
-        DirectoryEntry dEntry = new DirectoryEntry(ldapConnection);
-        DirectorySearcher search = new DirectorySearcher(dEntry);
 
         if (!isEmail && !String.IsNullOrWhiteSpace(userNameOrEmail))
         {

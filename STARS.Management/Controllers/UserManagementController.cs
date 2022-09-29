@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using STARS.Management.Core.Interface;
 
 namespace STARS.Management.Controllers
 {
@@ -10,28 +11,22 @@ namespace STARS.Management.Controllers
     [Route("[controller]")]
     public class UserManagementController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
-
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILDAPService _lDAPService;
 
-        public UserManagementController(ILogger<WeatherForecastController> logger)
+        public UserManagementController(ILogger<WeatherForecastController> logger, ILDAPService lDAPService)
         {
             _logger = logger;
+            _lDAPService = lDAPService;
         }
 
-        [HttpGet(Name = "GetUserDetails")]
-        public IEnumerable<WeatherForecast> Get()
+        [HttpGet(Name = "GetUserDetails/{username}/")]
+        public ActionResult Get([FromRoute] string username)
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+            _lDAPService.GetUserFromAD(username,false);
+
+            return Ok();
+
         }
     }
 }

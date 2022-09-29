@@ -1,9 +1,11 @@
+using System.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using STARS.Management.Core.Interface;
+using STARS.Management.Core.Models;
 using STARS.Management.Infrastructure.Utility;
 
 namespace STARS.Management;
@@ -20,10 +22,13 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddSwaggerGen();
-        services.AddRazorPages();
         services.AddControllers();
-        services.AddSingleton<ILDAPService,LDAPService>();
+        services.AddMvc();
+        services.AddSingleton<ILDAPService, LDAPService>();
         services.AddEndpointsApiExplorer();
+        services.AddOptions();
+        services.Configure<LDAPontext>(configRoot.GetSection("LDAPontext"));
+
     }
     public void Configure(WebApplication app, IWebHostEnvironment env)
     {

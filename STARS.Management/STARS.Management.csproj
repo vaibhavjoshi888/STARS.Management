@@ -8,5 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="..\STARS.Management.Core\STARS.Management.Core.csproj" />
     <ProjectReference Include="..\STARS.Management.Infrastructure\STARS.Management.Infrastructure.csproj" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
   </ItemGroup>
 </Project>
