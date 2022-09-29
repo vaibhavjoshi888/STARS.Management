@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using STARS.Management.Core.Interface;
+using STARS.Management.Infrastructure.Utility;
 
 namespace STARS.Management;
 public class Startup
@@ -20,6 +22,7 @@ public class Startup
         services.AddSwaggerGen();
         services.AddRazorPages();
         services.AddControllers();
+        services.AddSingleton<ILDAPService,LDAPService>();
         services.AddEndpointsApiExplorer();
     }
     public void Configure(WebApplication app, IWebHostEnvironment env)

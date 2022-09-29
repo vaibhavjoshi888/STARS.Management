@@ -1,4 +1,5 @@
-﻿using STARS.Management.Core.Models;
+﻿using STARS.Management.Core.Interface;
+using STARS.Management.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -8,10 +9,10 @@ using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace STARS.Management.Infrastructure.Utility;
-public class LDAPUtil
+public class LDAPService :ILDAPService
 {
-    // private readonly ILogger<LDAPUtil> _logger;
-    public LDAPUtil()
+    // private readonly ILogger<LDAPService> _logger;
+    public LDAPService()
     {
 
     }
@@ -83,7 +84,7 @@ public class LDAPUtil
         catch (Exception ex)
         {
             throw ex;
-            // log.Error("LDAPUtil.GetUserFromAD method: An Error occurred while getting user info from AD", ex);
+            // log.Error("LDAPService.GetUserFromAD method: An Error occurred while getting user info from AD", ex);
         }
 
         return adUser;
