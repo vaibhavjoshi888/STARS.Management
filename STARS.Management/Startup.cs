@@ -27,7 +27,7 @@ public class Startup
         services.AddSingleton<ILDAPService, LDAPService>();
         services.AddEndpointsApiExplorer();
         services.AddOptions();
-        services.Configure<LDAPontext>(configRoot.GetSection("LDAPontext"));
+        services.Configure<LDAPContext>(configRoot.GetSection("LDAPContext"));
 
     }
     public void Configure(WebApplication app, IWebHostEnvironment env)

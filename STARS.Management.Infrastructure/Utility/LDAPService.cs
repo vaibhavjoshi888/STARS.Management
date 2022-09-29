@@ -1,4 +1,5 @@
-﻿using STARS.Management.Core.Interface;
+﻿using Microsoft.Extensions.Options;
+using STARS.Management.Core.Interface;
 using STARS.Management.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,9 @@ namespace STARS.Management.Infrastructure.Utility;
 public class LDAPService :ILDAPService
 {
     private readonly DirectorySearcher search;
-    public LDAPService()
+    public LDAPService(IOptions<LDAPContext> lDapContext)
     {
-        string ldapConnection = ConfigurationManager.AppSettings.Get("LdapConnection");
+        string ldapConnection = lDapContext.Value.Server;
         DirectoryEntry dEntry = new DirectoryEntry(ldapConnection);
         search = new DirectorySearcher(dEntry);
     }

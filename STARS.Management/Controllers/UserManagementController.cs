@@ -13,7 +13,6 @@ namespace STARS.Management.Controllers
     {
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly ILDAPService _lDAPService;
-
         public UserManagementController(ILogger<WeatherForecastController> logger, ILDAPService lDAPService)
         {
             _logger = logger;
