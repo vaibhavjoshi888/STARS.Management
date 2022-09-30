@@ -46,7 +46,7 @@ public class Startup
 
         app.UseHttpsRedirection();
         app.UseStaticFiles();
-        //app.UseRouting();
+        app.UseRouting();
         app.UseAuthorization();
         app.MapControllers();
         app.Run();
