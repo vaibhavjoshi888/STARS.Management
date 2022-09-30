@@ -6,7 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using STARS.Management.Core.Interface;
 using STARS.Management.Core.Models;
+using STARS.Management.Core.Services;
 using STARS.Management.Infrastructure.Context;
+using STARS.Management.Infrastructure.Repository;
+using STARS.Management.Infrastructure.UserManagement;
 using STARS.Management.Infrastructure.Utility;
 
 namespace STARS.Management;
@@ -24,14 +27,17 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-         services.AddSingleton<DapperContext>();
+        services.Configure<LDAPContext>(configRoot.GetSection("LDAPContext"));
+        services.AddSingleton<DapperContext>();
         services.AddSwaggerGen();
         services.AddControllers();
         services.AddMvc();
         services.AddSingleton<ILDAPService, LDAPService>();
+        services.AddScoped<IUserManagementService, UserManagementService>();
+        services.AddScoped<IUserManagementRepository, UserManagementRepository>();
         services.AddEndpointsApiExplorer();
         services.AddOptions();
-        services.Configure<LDAPContext>(configRoot.GetSection("LDAPContext"));
+        
 
     }
 
@@ -43,7 +49,7 @@ public class Startup
             // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             app.UseHsts();
         }
-        
+
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
