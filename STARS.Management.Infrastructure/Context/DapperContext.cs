@@ -12,7 +12,7 @@ public class DapperContext
     public DapperContext(IConfiguration configuration)
     {
         _configuration = configuration;
-        _connectionString = _configuration.GetConnectionString("SqlConnection");
+        _connectionString = _configuration.GetConnectionString("SqlDatabseConnection");
     }
 
     public IDbConnection CreateConnection()
