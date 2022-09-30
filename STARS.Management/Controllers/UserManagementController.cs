@@ -20,13 +20,13 @@ namespace STARS.Management.Controllers
         [HttpGet("getuserdetails/{username}")]
         public ActionResult Get(string username)
         {
-           _lDAPService.GetUserFromAD(username,false);
+          // _lDAPService.GetUserFromAD(username,false);
              return Ok();
 
         }
 
-        [HttpGet("getallusers")]
-        public ActionResult IsvalidUser()
+        [HttpGet("isvaliduser")]
+        public ActionResult IsvalidUser(LogInDTO loginDTO)
         {
           // _lDAPService.GetUserFromAD(username,false);
              return Ok();
@@ -49,7 +49,7 @@ namespace STARS.Management.Controllers
 
         }
 
-        [HttpPost("user/{appuserid}")]
+        [HttpPut("user/{appuserid}")]
         public ActionResult UpdateUser(string appuserid,UserDTO user)
         {
           // _lDAPService.GetUserFromAD(username,false);
@@ -60,7 +60,7 @@ namespace STARS.Management.Controllers
         [HttpDelete("deleteuser/{appuserid}")]
         public ActionResult Delete(string appuserid)
         {
-           _lDAPService.GetUserFromAD(appuserid,false);
+           //_lDAPService.GetUserFromAD(appuserid,false);
              return Ok();
 
         }
