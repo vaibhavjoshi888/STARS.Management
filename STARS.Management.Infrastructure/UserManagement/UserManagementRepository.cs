@@ -20,7 +20,7 @@ public class UserManagementRepository : IUserManagementRepository
     {
         try
         {
-            var query = "SELECT * FROM Roles";
+            var query = SqlList._insert_app_user;
             using (var connection = _context.CreateConnection())
             {
                 var roles = await connection.QueryAsync<object>(query);
