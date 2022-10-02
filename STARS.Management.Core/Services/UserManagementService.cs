@@ -7,13 +7,14 @@ namespace STARS.Management.Core.Services;
 
 public class UserManagementService : IUserManagementService
 {
-    
+
     private readonly IUserManagementRepository _userManagementRepository;
+    
     public UserManagementService(IUserManagementRepository userManagementRepository)
     {
-        _userManagementRepository=userManagementRepository;
+        _userManagementRepository = userManagementRepository;
     }
-    
+
     public void DeleteUser(string appuserid)
     {
         throw new System.NotImplementedException();
@@ -21,8 +22,8 @@ public class UserManagementService : IUserManagementService
 
     public List<UserDTO> GetAllUsers()
     {
-       var test= _userManagementRepository.GetAllUsers();
-       return null;
+        var test = _userManagementRepository.GetAllUsers();
+        return null;
     }
 
     public UserDTO IsvalidUser(LogInDTO loginDTO)

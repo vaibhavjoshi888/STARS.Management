@@ -1,1 +1,1 @@
-Insert into app user
+select * from roles

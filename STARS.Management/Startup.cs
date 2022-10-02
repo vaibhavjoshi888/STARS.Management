@@ -27,7 +27,7 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-      
+
         services.AddSwaggerGen();
         services.AddControllers();
         services.AddMvc();
@@ -38,7 +38,7 @@ public class Startup
         services.AddSingleton<ILDAPService, LDAPService>();
         services.AddScoped<IUserManagementService, UserManagementService>();
         services.AddScoped<IUserManagementRepository, UserManagementRepository>();
-
+        services.AddSingleton<IQueryProviderService, QueryProviderService>();
     }
 
     public void Configure(WebApplication app, IWebHostEnvironment env)

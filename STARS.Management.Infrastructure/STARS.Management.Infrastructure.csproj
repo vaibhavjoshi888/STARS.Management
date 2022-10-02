@@ -7,6 +7,9 @@
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.0" />
     <PackageReference Include="Dapper" Version="2.0.123" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UserManagement\SQL\inser_app-user.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
