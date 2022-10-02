@@ -11,57 +11,60 @@ namespace STARS.Management.Controllers
     {
         private readonly ILogger<UserManagementController> _logger;
         private readonly ILDAPService _lDAPService;
-        public UserManagementController(ILogger<UserManagementController> logger, ILDAPService lDAPService)
+        private readonly IUserManagementService _UserManagementService;
+        public UserManagementController(ILogger<UserManagementController> logger, ILDAPService lDAPService, IUserManagementService userManagementService)
         {
             _logger = logger;
             _lDAPService = lDAPService;
+            _UserManagementService = userManagementService;
         }
 
         [HttpGet("getuserdetails/{username}")]
         public ActionResult Get(string username)
         {
-          // _lDAPService.GetUserFromAD(username,false);
-             return Ok();
+            _UserManagementService.GetAllUsers();
+            // _lDAPService.GetUserFromAD(username,false);
+            return Ok();
 
         }
 
         [HttpGet("isvaliduser")]
         public ActionResult IsvalidUser(LogInDTO loginDTO)
         {
-          // _lDAPService.GetUserFromAD(username,false);
-             return Ok();
+            // _lDAPService.GetUserFromAD(username,false);
+            return Ok();
 
         }
 
         [HttpGet("searchuser/{username}")]
         public ActionResult SearchUser(string username)
         {
-           //_lDAPService.GetUserFromAD(username,false);
-             return Ok();
+            //_lDAPService.GetUserFromAD(username,false);
+            return Ok();
 
         }
 
         [HttpPost("user")]
         public ActionResult SaveUser(UserDTO user)
         {
-          // _lDAPService.GetUserFromAD(username,false);
-             return Ok();
+            // _lDAPService.GetUserFromAD(username,false);
+            return Ok();
 
         }
 
         [HttpPut("user/{appuserid}")]
-        public ActionResult UpdateUser(string appuserid,UserDTO user)
+        public ActionResult UpdateUser(string appuserid, UserDTO user)
         {
-          // _lDAPService.GetUserFromAD(username,false);
-             return Ok();
+            // _lDAPService.GetUserFromAD(username,false);
+            return Ok();
 
         }
 
         [HttpDelete("deleteuser/{appuserid}")]
         public ActionResult Delete(string appuserid)
         {
-           //_lDAPService.GetUserFromAD(appuserid,false);
-             return Ok();
+            //_lDAPService.GetUserFromAD(appuserid,false);
+            return Ok();
 
         }
 

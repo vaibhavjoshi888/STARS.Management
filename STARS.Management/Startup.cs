@@ -27,17 +27,17 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        services.Configure<LDAPContext>(configRoot.GetSection("LDAPContext"));
-        services.AddSingleton<DapperContext>();
+      
         services.AddSwaggerGen();
         services.AddControllers();
         services.AddMvc();
+        services.AddEndpointsApiExplorer();
+        services.AddOptions();
+        services.Configure<LDAPContext>(configRoot.GetSection("LDAPContext"));
+        services.AddSingleton<DapperContext>();
         services.AddSingleton<ILDAPService, LDAPService>();
         services.AddScoped<IUserManagementService, UserManagementService>();
         services.AddScoped<IUserManagementRepository, UserManagementRepository>();
-        services.AddEndpointsApiExplorer();
-        services.AddOptions();
-        
 
     }
 
