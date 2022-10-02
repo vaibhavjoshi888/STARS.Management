@@ -6,9 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using STARS.Management.Core.Interface;
 using STARS.Management.Core.Models;
+using STARS.Management.Core.Repository;
 using STARS.Management.Core.Services;
 using STARS.Management.Infrastructure.Context;
-using STARS.Management.Infrastructure.Repository;
 using STARS.Management.Infrastructure.UserManagement;
 using STARS.Management.Infrastructure.Utility;
 

@@ -1,11 +1,18 @@
 using System.Collections.Generic;
 using STARS.Management.Core.DTO;
 using STARS.Management.Core.Interface;
+using STARS.Management.Core.Repository;
 
 namespace STARS.Management.Core.Services;
 
 public class UserManagementService : IUserManagementService
 {
+    
+    private readonly IUserManagementRepository _userManagementRepository;
+    public UserManagementService(IUserManagementRepository userManagementRepository)
+    {
+        _userManagementRepository=userManagementRepository;
+    }
     
     public void DeleteUser(string appuserid)
     {
@@ -14,7 +21,8 @@ public class UserManagementService : IUserManagementService
 
     public List<UserDTO> GetAllUsers()
     {
-        throw new System.NotImplementedException();
+       var test= _userManagementRepository.GetAllUsers();
+       return null;
     }
 
     public UserDTO IsvalidUser(LogInDTO loginDTO)
