@@ -1,3 +1,4 @@
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using STARS.Management.Core.DTO;
@@ -22,16 +23,17 @@ namespace STARS.Management.Controllers
         [HttpGet("getuserdetails/{username}")]
         public ActionResult Get(string username)
         {
-            _UserManagementService.GetAllUsers();
-            // _lDAPService.GetUserFromAD(username,false);
-            return Ok();
+            var users = _UserManagementService.GetAllUsers();
+            if (users.Any())
+                return Ok(users);
+            else return NotFound("Record Not Found");
 
         }
 
         [HttpGet("isvaliduser")]
         public ActionResult IsvalidUser(LogInDTO loginDTO)
         {
-            // _lDAPService.GetUserFromAD(username,false);
+            _UserManagementService.IsvalidUser(loginDTO);
             return Ok();
 
         }
@@ -47,7 +49,7 @@ namespace STARS.Management.Controllers
         [HttpPost("user")]
         public ActionResult SaveUser(UserDTO user)
         {
-            // _lDAPService.GetUserFromAD(username,false);
+            _UserManagementService.SaveUser(user);
             return Ok();
 
         }
