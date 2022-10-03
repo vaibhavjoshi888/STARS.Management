@@ -86,10 +86,10 @@ public class UserManagementRepository : IUserManagementRepository
         parameters.Add("Note", "", DbType.String);
         parameters.Add("CreatedDate", DateTime.Now, DbType.String);
         parameters.Add("CreatedBy", "", DbType.String);
-        parameters.Add("ActiveStatus", "IsActive", DbType.String);
+        parameters.Add("ActiveStatus", "1", DbType.String);
 
-        parameters.Add("AppUserId", "IsActive", DbType.String);
-        parameters.Add("RoleId", "IsActive", DbType.String);
+        parameters.Add("AppUserId", 1, DbType.Int16);
+        parameters.Add("RoleId",1, DbType.Binary);
 
 
         using (var connection = _context.CreateConnection())

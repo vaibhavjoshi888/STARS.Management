@@ -34,9 +34,14 @@ public class UserManagementService : IUserManagementService
 
     public UserDTO IsvalidUser(LogInDTO loginDTO)
     {
-        if(_lDAPService.IsValidADUser(loginDTO.UserName, loginDTO.Password))
+        if (_lDAPService.IsValidADUser(loginDTO.UserName, loginDTO.Password))
         {
-
+            var adUserinfo = _lDAPService.GetUserFromAD(loginDTO.UserName, false);
+            UserDTO userDTO = new UserDTO
+            {
+                CorpID = adUserinfo.CorpID,
+            };
+            return userDTO;
         }
 
         return null;
