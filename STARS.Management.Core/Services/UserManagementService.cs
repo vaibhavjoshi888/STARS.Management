@@ -33,7 +33,7 @@ public class UserManagementService : IUserManagementService
 
     public void SaveUser(UserDTO user)
     {
-        throw new System.NotImplementedException();
+        _userManagementRepository.CreateUser(user);
     }
 
     public List<UserDTO> SearchUser(string username)

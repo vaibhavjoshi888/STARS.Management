@@ -82,16 +82,13 @@ public class UserManagementRepository : IUserManagementRepository
         parameters.Add("Title", userDTO.Title, DbType.String);
         parameters.Add("ManagerCorpUserId", userDTO.ManagerCorpID, DbType.String);
         parameters.Add("ManagerDisplayName", userDTO.ManagerDisplayName, DbType.String);
-        parameters.Add("Note", userDTO., DbType.String);
+        parameters.Add("Note", "", DbType.String);
         parameters.Add("CreatedDate", DateTime.Now, DbType.String);
         parameters.Add("CreatedBy", "", DbType.String);
         parameters.Add("ActiveStatus", "IsActive", DbType.String);
 
-        parameters.Add("ActiveStatus", "IsActive", DbType.String);
-        parameters.Add("ActiveStatus", "IsActive", DbType.String);
-        parameters.Add("ActiveStatus", "IsActive", DbType.String);
-        parameters.Add("ActiveStatus", "IsActive", DbType.String);
-
+        parameters.Add("AppUserId", "IsActive", DbType.String);
+        parameters.Add("RoleId", "IsActive", DbType.String);
 
 
         using (var connection = _context.CreateConnection().QueryMultiple(query, parameters))
@@ -99,4 +96,5 @@ public class UserManagementRepository : IUserManagementRepository
             //await connection.(query, parameters);
         }
     }
+
 }

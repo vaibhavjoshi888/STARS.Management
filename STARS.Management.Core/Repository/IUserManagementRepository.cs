@@ -4,9 +4,11 @@ using STARS.Management.Core.DTO;
 
 namespace STARS.Management.Core.Repository;
 
-    public interface IUserManagementRepository
-    {
-        public Task<List<UserDTO>> GetAllUsers();
+public interface IUserManagementRepository
+{
+    public Task<IEnumerable<UserDTO>> GetAllUsers();
+    public Task CreateUser(UserDTO userDTO);
+    public Task<IEnumerable<RolesDTO>> GetAllRoles();
 
-    }
+}
 
