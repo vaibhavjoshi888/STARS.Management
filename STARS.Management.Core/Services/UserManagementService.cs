@@ -9,10 +9,22 @@ public class UserManagementService : IUserManagementService
 {
 
     private readonly IUserManagementRepository _userManagementRepository;
-    
-    public UserManagementService(IUserManagementRepository userManagementRepository)
+    private readonly ILDAPService _lDAPService;
+
+    public UserManagementService(IUserManagementRepository userManagementRepository, ILDAPService lDAPService)
     {
         _userManagementRepository = userManagementRepository;
+        _lDAPService = lDAPService;
+    }
+
+    public void SaveUser(UserDTO user)
+    {
+        _userManagementRepository.CreateUser(user);
+    }
+
+    public IEnumerable<UserDTO> GetAllUsers()
+    {
+        return _userManagementRepository.GetAllUsers().Result;
     }
 
     public void DeleteUser(string appuserid)
@@ -20,20 +32,15 @@ public class UserManagementService : IUserManagementService
         throw new System.NotImplementedException();
     }
 
-    public List<UserDTO> GetAllUsers()
-    {
-        var test = _userManagementRepository.GetAllUsers();
-        return null;
-    }
-
     public UserDTO IsvalidUser(LogInDTO loginDTO)
     {
-        throw new System.NotImplementedException();
-    }
+        if(_lDAPService.IsValidADUser(loginDTO.UserName, loginDTO.Password))
+        {
 
-    public void SaveUser(UserDTO user)
-    {
-        _userManagementRepository.CreateUser(user);
+            _userManagementRepository.
+        }
+
+        return null;
     }
 
     public List<UserDTO> SearchUser(string username)
