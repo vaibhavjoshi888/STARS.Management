@@ -65,9 +65,10 @@ public class UserManagementRepository : IUserManagementRepository
 
     public async Task CreateUser(UserDTO userDTO)
     {
-        var query = _QueryProviderService.GetQuery(UserSqlList._insert_app_user);
+        var queryAppUser = _QueryProviderService.GetQuery(UserSqlList._insert_app_user);
+        var queryUserRoles = _QueryProviderService.GetQuery(UserSqlList.InserUserRoles);
         var parameters = new DynamicParameters();
-        
+
         parameters.Add("CorpUserId", userDTO.CorpID, DbType.String);
         parameters.Add("Email", userDTO.Email, DbType.String);
         parameters.Add("Phone", userDTO.Phone, DbType.String);
@@ -91,9 +92,10 @@ public class UserManagementRepository : IUserManagementRepository
         parameters.Add("RoleId", "IsActive", DbType.String);
 
 
-        using (var connection = _context.CreateConnection().QueryMultiple(query, parameters))
+        using (var connection = _context.CreateConnection())
         {
-            //await connection.(query, parameters);
+            var userid = await connection.ExecuteAsync(queryAppUser, parameters);
+            var id = await connection.ExecuteAsync(queryAppUser, parameters);
         }
     }
 

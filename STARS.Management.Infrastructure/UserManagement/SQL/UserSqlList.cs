@@ -6,5 +6,6 @@ public static class UserSqlList
     internal static string _insert_app_user { get => $"{_Namespace}.insert_app-user.sql";  }
     internal static string GetallUsers { get => $"{_Namespace}.get_all_users.sql";  }
     internal static string GetallRoles { get => $"{_Namespace}.get_all_roles.sql";  }
-    
+    internal static string InserUserRoles { get => $"{_Namespace}.insert_user_roles.sql";  }
+
 }
