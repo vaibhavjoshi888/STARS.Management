@@ -37,7 +37,6 @@ public class UserManagementService : IUserManagementService
         if(_lDAPService.IsValidADUser(loginDTO.UserName, loginDTO.Password))
         {
 
-            _userManagementRepository.
         }
 
         return null;
