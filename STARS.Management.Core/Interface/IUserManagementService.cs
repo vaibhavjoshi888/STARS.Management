@@ -5,7 +5,7 @@ namespace STARS.Management.Core.Interface;
 
 public interface IUserManagementService
 {
-    List<UserDTO> GetAllUsers();
+    IEnumerable<UserDTO> GetAllUsers();
     UserDTO IsvalidUser(LogInDTO loginDTO);
     List<UserDTO> SearchUser(string username);
     void SaveUser(UserDTO user);

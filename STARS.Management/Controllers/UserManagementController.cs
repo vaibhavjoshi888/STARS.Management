@@ -11,12 +11,10 @@ namespace STARS.Management.Controllers
     public class UserManagementController : ControllerBase
     {
         private readonly ILogger<UserManagementController> _logger;
-        private readonly ILDAPService _lDAPService;
         private readonly IUserManagementService _UserManagementService;
-        public UserManagementController(ILogger<UserManagementController> logger, ILDAPService lDAPService, IUserManagementService userManagementService)
+        public UserManagementController(ILogger<UserManagementController> logger, IUserManagementService userManagementService)
         {
             _logger = logger;
-            _lDAPService = lDAPService;
             _UserManagementService = userManagementService;
         }
 
@@ -38,6 +36,14 @@ namespace STARS.Management.Controllers
 
         }
 
+        [HttpPost("user")]
+        public ActionResult SaveUser(UserDTO user)
+        {
+            _UserManagementService.SaveUser(user);
+            return Ok();
+
+        }
+
         [HttpGet("searchuser/{username}")]
         public ActionResult SearchUser(string username)
         {
@@ -46,13 +52,6 @@ namespace STARS.Management.Controllers
 
         }
 
-        [HttpPost("user")]
-        public ActionResult SaveUser(UserDTO user)
-        {
-            _UserManagementService.SaveUser(user);
-            return Ok();
-
-        }
 
         [HttpPut("user/{appuserid}")]
         public ActionResult UpdateUser(string appuserid, UserDTO user)
