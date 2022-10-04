@@ -65,31 +65,37 @@ public class UserManagementRepository : IUserManagementRepository
 
     public async Task CreateUser(UserDTO userDTO)
     {
-       
-        var queryAppUser = _QueryProviderService.GetQuery(UserSqlList._insert_app_user);
-        var parameters = new DynamicParameters();
-        parameters.Add("corpuserid", userDTO.CorpID, DbType.String);
-        parameters.Add("email", userDTO.Email, DbType.String);
-        parameters.Add("phone", userDTO.Phone, DbType.String);
-        parameters.Add("firstname", userDTO.FullName, DbType.String);
-        parameters.Add("lastname", userDTO.Surname, DbType.String);
-        parameters.Add("displayname", userDTO.DisplayName, DbType.String);
-        parameters.Add("employeetype", userDTO.EmployeeType, DbType.String);
-        parameters.Add("employeenumber", userDTO.EmployeeNumber, DbType.String);
-        parameters.Add("physicaldeliveryofficename", userDTO.PhysicalDeliveryOfficeName, DbType.String);
-        parameters.Add("department", userDTO.Department, DbType.String);
-        parameters.Add("division", userDTO.Division, DbType.String);
-        parameters.Add("title", userDTO.Title, DbType.String);
-        parameters.Add("managercorpuserid", userDTO.ManagerCorpID, DbType.String);
-        parameters.Add("managerdisplayname", userDTO.ManagerDisplayName, DbType.String);
-        parameters.Add("note", "", DbType.String);
-        parameters.Add("createdby", "", DbType.String);
-        parameters.Add("activestatus", "1", DbType.String);
-        parameters.Add("roleid", userDTO.UserRoleId, DbType.Int32);
-
-        using (var connection = _context.CreateConnection())
+        try
         {
-            var userid = await connection.ExecuteAsync(queryAppUser, parameters);
+            var queryAppUser = _QueryProviderService.GetQuery(UserSqlList._insert_app_user);
+            var parameters = new DynamicParameters();
+            parameters.Add("corpuserid", userDTO.CorpID, DbType.String);
+            parameters.Add("email", userDTO.Email, DbType.String);
+            parameters.Add("phone", userDTO.Phone, DbType.String);
+            parameters.Add("firstname", userDTO.FullName, DbType.String);
+            parameters.Add("lastname", userDTO.Surname, DbType.String);
+            parameters.Add("displayname", userDTO.DisplayName, DbType.String);
+            parameters.Add("employeetype", userDTO.EmployeeType, DbType.String);
+            parameters.Add("employeenumber", userDTO.EmployeeNumber, DbType.String);
+            parameters.Add("physicaldeliveryofficename", userDTO.PhysicalDeliveryOfficeName, DbType.String);
+            parameters.Add("department", userDTO.Department, DbType.String);
+            parameters.Add("division", userDTO.Division, DbType.String);
+            parameters.Add("title", userDTO.Title, DbType.String);
+            parameters.Add("managercorpuserid", userDTO.ManagerCorpID, DbType.String);
+            parameters.Add("managerdisplayname", userDTO.ManagerDisplayName, DbType.String);
+            parameters.Add("note", "", DbType.String);
+            parameters.Add("createdby", "test", DbType.String);
+            parameters.Add("activestatus", "1", DbType.String);
+            parameters.Add("roleid", userDTO.UserRoleId, DbType.Int32);
+
+            using (var connection = _context.CreateConnection())
+            {
+                var identity = await connection.ExecuteAsync(queryAppUser, parameters); 
+            }
+        }
+        catch (Exception ex)
+        {
+            throw ex;
         }
     }
 
