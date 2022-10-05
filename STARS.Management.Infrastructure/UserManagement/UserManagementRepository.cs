@@ -43,6 +43,30 @@ public class UserManagementRepository : IUserManagementRepository
         }
     }
 
+    public async Task<UserDTO> GetUserByCorpUserId(string userid)
+    {
+        try
+        {
+            var query = _QueryProviderService.GetQuery(UserSqlList.GetUserRole);
+             var parameters = new DynamicParameters();
+            parameters.Add("@operation", "GetSignedUser", DbType.String);
+              parameters.Add("@userId",userid, DbType.String);
+            using (var connection = _context.CreateConnection())
+            {
+                var user = await connection.QueryAsync<UserDTO>(query,userid);
+                if (user.Any())
+                    return user.SingleOrDefault();
+                else
+                    return null;
+            }
+
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+
     public async Task<IEnumerable<RolesDTO>> GetAllRoles()
     {
         try
@@ -90,7 +114,7 @@ public class UserManagementRepository : IUserManagementRepository
 
             using (var connection = _context.CreateConnection())
             {
-                var identity = await connection.ExecuteAsync(queryAppUser, parameters); 
+                var identity = await connection.ExecuteAsync(queryAppUser, parameters);
             }
         }
         catch (Exception ex)

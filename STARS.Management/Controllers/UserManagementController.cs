@@ -1,3 +1,4 @@
+
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -31,6 +32,7 @@ namespace STARS.Management.Controllers
         [HttpGet("isvaliduser")]
         public ActionResult IsvalidUser(LogInDTO loginDTO)
         {
+            
            var userDto= _UserManagementService.IsvalidUser(loginDTO);
             return Ok(userDto);
 
@@ -44,14 +46,13 @@ namespace STARS.Management.Controllers
 
         }
 
-        [HttpGet("searchuser/{username}")]
-        public ActionResult SearchUser(string username)
+        [HttpGet("searchuser/{searchtext}")]
+        public ActionResult SearchUser(string searchtext)
         {
             //_lDAPService.GetUserFromAD(username,false);
             return Ok();
 
         }
-
 
         [HttpPut("user/{appuserid}")]
         public ActionResult UpdateUser(string appuserid, UserDTO user)
@@ -68,6 +69,7 @@ namespace STARS.Management.Controllers
             return Ok();
 
         }
+
 
     }
 }

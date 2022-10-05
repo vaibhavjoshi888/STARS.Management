@@ -1,1 +1,1 @@
-select * from users
+EXEC usp_getallusers '@operation','@userId'

@@ -11,6 +11,8 @@
     <EmbeddedResource Include="UserManagement\SQL\insert_app-user.sql" />
     <EmbeddedResource Include="UserManagement\SQL\get_all_users.sql" />
     <EmbeddedResource Include="UserManagement\SQL\get_all_roles.sql" />
+    <EmbeddedResource Include="UserManagement\SQL\get_user_role.sql" />
+    
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
