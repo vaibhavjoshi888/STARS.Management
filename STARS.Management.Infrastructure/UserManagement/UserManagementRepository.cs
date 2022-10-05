@@ -45,7 +45,7 @@ public class UserManagementRepository : IUserManagementRepository
         }
     }
 
-    public async Task<UserDTO> GetUserByCorpUserId(string userid)
+    public async Task<UserRolesDTO> GetUserByCorpUserId(string userid)
     {
         try
         {
@@ -55,7 +55,7 @@ public class UserManagementRepository : IUserManagementRepository
             parameters.Add("@userId", userid, DbType.String);
             using (var connection = _context.CreateConnection())
             {
-                var user = await connection.QueryAsync<UserDTO>(query, userid);
+                var user = await connection.QueryAsync<UserRolesDTO>(query, userid);
                 if (user.Any())
                     return user.SingleOrDefault();
                 else

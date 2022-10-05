@@ -29,23 +29,25 @@ public class UserManagementService : IUserManagementService
         return _userManagementRepository.GetAllUsers().Result;
     }
 
-    public UserDTO IsvalidUser(LogInDTO loginDTO)
+    public UserRolesDTO IsvalidUser(LogInDTO loginDTO)
     {
         if (_lDAPService.IsValidADUser(loginDTO.UserName, loginDTO.Password))
         {
             var user = _userManagementRepository.GetUserByCorpUserId(loginDTO.UserName).Result;
             if (user != null)
             {
-
-                //form sigined in user and return
-                var adUserinfo = _lDAPService.GetUserFromAD(loginDTO.UserName, false);
-
-                //return signedin user
-                UserDTO userDTO = new UserDTO
-                {
-                    CorpID = adUserinfo.CorpID,
-                };
-                return userDTO;
+                var adUserInfo = _lDAPService.GetUserFromAD(loginDTO.UserName, false);
+                SignedInUserDTO signedInUser = new SignedInUserDTO();
+                signedInUser.CorpUserId = string.Format(@"CORP\{0}", adUserInfo.CorpID);
+                signedInUser.DisplayName = adUserInfo.DisplayName;
+                signedInUser.FirstName = adUserInfo.GivenName;
+                signedInUser.LastName = adUserInfo.Surname;
+                signedInUser.Email = adUserInfo.Email;
+                signedInUser.AppUserId = 0;
+                signedInUser.RoleId = user.RoleId;
+                signedInUser.RoleName = user.RoleDisplayName;
+                
+                return user;
             }
         }
 
