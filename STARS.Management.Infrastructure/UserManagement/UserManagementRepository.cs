@@ -153,7 +153,7 @@ public class UserManagementRepository : IUserManagementRepository
         {
             var queryAppUser = _QueryProviderService.GetQuery(UserSqlList._insert_app_user);
             var parameters = new DynamicParameters();
-            parameters.Add("operation", "Update", DbType.String);
+            parameters.Add("operation", "Delete", DbType.String);
             parameters.Add("corpuserid",userid, DbType.String);
             using (var connection = _context.CreateConnection())
             {

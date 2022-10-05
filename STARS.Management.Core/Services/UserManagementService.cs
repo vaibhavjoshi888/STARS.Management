@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using STARS.Management.Core.DTO;
 using STARS.Management.Core.Interface;
 using STARS.Management.Core.Repository;
@@ -26,11 +27,6 @@ public class UserManagementService : IUserManagementService
     public IEnumerable<UserDTO> GetAllUsers()
     {
         return _userManagementRepository.GetAllUsers().Result;
-    }
-
-    public void DeleteUser(string appuserid)
-    {
-        throw new System.NotImplementedException();
     }
 
     public UserDTO IsvalidUser(LogInDTO loginDTO)
@@ -63,10 +59,35 @@ public class UserManagementService : IUserManagementService
 
     public void UpdateUser(string appuserid, UserDTO user)
     {
-        throw new System.NotImplementedException();
+        if (ValidateUpdateUserUser(user))
+            _userManagementRepository.UpdateUser(user);
     }
 
-    private bool ValidateUser(UserDTO user)
+    public void DeleteUser(string appuserid)
+    {
+        _userManagementRepository.DeleteUser(appuserid);
+    }
+    
+    public List<RolesDTO> GetAllRoles()
+    {
+      return _userManagementRepository.GetAllRoles().Result.ToList();
+    }
+     private bool ValidateUser(UserDTO user)
+    {
+        var userinfo = _lDAPService.GetUserFromAD(user.CorpID, false);
+
+        if (userinfo != null)
+        {
+            var appuser = _userManagementRepository.GetUserByCorpUserId(user.CorpID);
+            if (appuser == null)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private bool ValidateUpdateUserUser(UserDTO user)
     {
         var userinfo = _lDAPService.GetUserFromAD(user.CorpID, false);
 
