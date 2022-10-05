@@ -27,9 +27,11 @@ public class UserManagementRepository : IUserManagementRepository
         try
         {
             var query = _QueryProviderService.GetQuery(UserSqlList.GetallUsers);
+            var parameters = new DynamicParameters();
+            parameters.Add("@operation", "GetAll", DbType.String);
             using (var connection = _context.CreateConnection())
             {
-                var user = await connection.QueryAsync<UserDTO>(query);
+                var user = await connection.QueryAsync<UserDTO>(query, parameters);
                 if (user.Any())
                     return user;
                 else
@@ -48,12 +50,12 @@ public class UserManagementRepository : IUserManagementRepository
         try
         {
             var query = _QueryProviderService.GetQuery(UserSqlList.GetUserRole);
-             var parameters = new DynamicParameters();
+            var parameters = new DynamicParameters();
             parameters.Add("@operation", "GetSignedUser", DbType.String);
-              parameters.Add("@userId",userid, DbType.String);
+            parameters.Add("@userId", userid, DbType.String);
             using (var connection = _context.CreateConnection())
             {
-                var user = await connection.QueryAsync<UserDTO>(query,userid);
+                var user = await connection.QueryAsync<UserDTO>(query, userid);
                 if (user.Any())
                     return user.SingleOrDefault();
                 else
@@ -71,7 +73,7 @@ public class UserManagementRepository : IUserManagementRepository
     {
         try
         {
-            var query = _QueryProviderService.GetQuery(UserSqlList.GetallUsers);
+            var query = _QueryProviderService.GetQuery(UserSqlList.GetallRoles);
             using (var connection = _context.CreateConnection())
             {
                 var rolesDTOs = await connection.QueryAsync<RolesDTO>(query);
@@ -93,6 +95,7 @@ public class UserManagementRepository : IUserManagementRepository
         {
             var queryAppUser = _QueryProviderService.GetQuery(UserSqlList._insert_app_user);
             var parameters = new DynamicParameters();
+            parameters.Add("operation", "Insert", DbType.String);
             parameters.Add("corpuserid", userDTO.CorpID, DbType.String);
             parameters.Add("email", userDTO.Email, DbType.String);
             parameters.Add("phone", userDTO.Phone, DbType.String);

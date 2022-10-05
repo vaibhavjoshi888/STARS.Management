@@ -1,1 +1,1 @@
-EXEC usp_getallusers '@operation','@userId'
+EXEC usp_getallroles
