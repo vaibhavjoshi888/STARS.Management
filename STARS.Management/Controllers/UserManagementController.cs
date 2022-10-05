@@ -32,8 +32,8 @@ namespace STARS.Management.Controllers
         [HttpGet("isvaliduser")]
         public ActionResult IsvalidUser(LogInDTO loginDTO)
         {
-            
-           var userDto= _UserManagementService.IsvalidUser(loginDTO);
+
+            var userDto = _UserManagementService.IsvalidUser(loginDTO);
             return Ok(userDto);
 
         }
@@ -57,7 +57,7 @@ namespace STARS.Management.Controllers
         [HttpPut("user/{appuserid}")]
         public ActionResult UpdateUser(string appuserid, UserDTO user)
         {
-            // _lDAPService.GetUserFromAD(username,false);
+            _UserManagementService.UpdateUser(appuserid, user);
             return Ok();
 
         }
@@ -65,7 +65,7 @@ namespace STARS.Management.Controllers
         [HttpDelete("deleteuser/{appuserid}")]
         public ActionResult Delete(string appuserid)
         {
-            //_lDAPService.GetUserFromAD(appuserid,false);
+            _UserManagementService.DeleteUser(appuserid);
             return Ok();
 
         }

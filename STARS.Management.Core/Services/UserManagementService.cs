@@ -67,12 +67,12 @@ public class UserManagementService : IUserManagementService
     {
         _userManagementRepository.DeleteUser(appuserid);
     }
-    
+
     public List<RolesDTO> GetAllRoles()
     {
-      return _userManagementRepository.GetAllRoles().Result.ToList();
+        return _userManagementRepository.GetAllRoles().Result.ToList();
     }
-     private bool ValidateUser(UserDTO user)
+    private bool ValidateUser(UserDTO user)
     {
         var userinfo = _lDAPService.GetUserFromAD(user.CorpID, false);
 
