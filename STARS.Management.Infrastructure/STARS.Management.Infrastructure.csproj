@@ -12,6 +12,9 @@
     <EmbeddedResource Include="UserManagement\SQL\get_all_users.sql" />
     <EmbeddedResource Include="UserManagement\SQL\get_all_roles.sql" />
     <EmbeddedResource Include="UserManagement\SQL\get_user_role.sql" />
+
+    <EmbeddedResource Include="UserManagement\SQL\delete_app-user.sql" />
+    <EmbeddedResource Include="UserManagement\SQL\update_app-user.sql" />
     
   </ItemGroup>
   <PropertyGroup>

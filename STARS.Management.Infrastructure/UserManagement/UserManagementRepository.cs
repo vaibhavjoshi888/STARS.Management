@@ -126,4 +126,43 @@ public class UserManagementRepository : IUserManagementRepository
         }
     }
 
+    public async Task UpdateUser(UserDTO userDTO)
+    {
+        try
+        {
+            var queryAppUser = _QueryProviderService.GetQuery(UserSqlList._insert_app_user);
+            var parameters = new DynamicParameters();
+            parameters.Add("operation", "Update", DbType.String);
+            parameters.Add("corpuserid", userDTO.CorpID, DbType.String);
+            parameters.Add("roleid", userDTO.UserRoleId, DbType.Int32);
+
+            using (var connection = _context.CreateConnection())
+            {
+                var identity = await connection.ExecuteAsync(queryAppUser, parameters);
+            }
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+    
+     public async Task DeleteUser(string userid)
+    {
+        try
+        {
+            var queryAppUser = _QueryProviderService.GetQuery(UserSqlList._insert_app_user);
+            var parameters = new DynamicParameters();
+            parameters.Add("operation", "Update", DbType.String);
+            parameters.Add("corpuserid",userid, DbType.String);
+            using (var connection = _context.CreateConnection())
+            {
+                var identity = await connection.ExecuteAsync(queryAppUser, parameters);
+            }
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
 }

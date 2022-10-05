@@ -9,7 +9,8 @@ public interface IUserManagementRepository
     public Task<IEnumerable<UserDTO>> GetAllUsers();
     public Task CreateUser(UserDTO userDTO);
     public Task<IEnumerable<RolesDTO>> GetAllRoles();
-    public  Task<UserDTO> GetUserByCorpUserId(string userid);
+    public Task<UserDTO> GetUserByCorpUserId(string userid);
+    public Task UpdateUser(UserDTO userDTO);
 
 }
 

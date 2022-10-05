@@ -7,5 +7,7 @@ public static class UserSqlList
     internal static string GetallUsers { get => $"{_Namespace}.get_all_users.sql";  }
     internal static string GetallRoles { get => $"{_Namespace}.get_all_roles.sql";  }
     internal static string GetUserRole { get => $"{_Namespace}.get_user_role.sql";  }
+    internal static string delete_app_user { get => $"{_Namespace}.delete_app-user.sql";  }
+    internal static string Update_app_user { get => $"{_Namespace}.update_app-user.sql";  }
 
 }
