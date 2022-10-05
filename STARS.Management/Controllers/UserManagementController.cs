@@ -29,13 +29,14 @@ namespace STARS.Management.Controllers
 
         }
 
-        [HttpGet("isvaliduser")]
+        [HttpPost("isvaliduser")]
         public ActionResult IsvalidUser(LogInDTO loginDTO)
         {
 
             var userDto = _UserManagementService.IsvalidUser(loginDTO);
-            return Ok(userDto);
-
+            if (userDto != null)
+                return Ok(userDto);
+            return NotFound();
         }
 
         [HttpPost("user")]
