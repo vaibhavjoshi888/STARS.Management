@@ -59,15 +59,15 @@ public class UserManagementService : IUserManagementService
         throw new System.NotImplementedException();
     }
 
-    public void UpdateUser(string appuserid, UserAssignRoleDTO user)
+    public void UpdateUser(string corpuserid, UserAssignRoleDTO user)
     {
-        if (ValidateUpdateUserUser(user))
-            _userManagementRepository.UpdateUser(user);
+        if (ValidateUpdateUserUser(corpuserid,user))
+            _userManagementRepository.UpdateUser(corpuserid,user);
     }
 
-    public void DeleteUser(string appuserid)
+    public void DeleteUser(string corpuserid)
     {
-        _userManagementRepository.DeleteUser(appuserid);
+        _userManagementRepository.DeleteUser(corpuserid);
     }
 
     public List<RolesDTO> GetAllRoles()
@@ -89,13 +89,13 @@ public class UserManagementService : IUserManagementService
         return false;
     }
 
-    private bool ValidateUpdateUserUser(UserAssignRoleDTO user)
+    private bool ValidateUpdateUserUser(string corpuserid,UserAssignRoleDTO user)
     {
-        var userinfo = _lDAPService.GetUserFromAD(user.CorpID, false);
+        var userinfo = _lDAPService.GetUserFromAD(corpuserid, false);
 
         if (userinfo != null)
         {
-            var appuser = _userManagementRepository.GetUserByCorpUserId(user.CorpID).Result;
+            var appuser = _userManagementRepository.GetUserByCorpUserId(corpuserid).Result;
             if (appuser != null)
             {
                 return true;
