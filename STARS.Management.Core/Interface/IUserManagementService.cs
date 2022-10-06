@@ -10,8 +10,8 @@ public interface IUserManagementService
     SignedInUserDTO IsvalidUser(LogInDTO loginDTO);
     List<UserDTO> SearchUser(string username);
     void SaveUser(UserDTO user);
-    void UpdateUser(string appuserid, UserAssignRoleDTO user);
-    void DeleteUser(string appuserid);
+    void UpdateUser(string corpuserid, UserAssignRoleDTO user);
+    void DeleteUser(string corpuserid);
     List<RolesDTO> GetAllRoles();
 
 }

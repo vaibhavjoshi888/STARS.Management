@@ -55,18 +55,18 @@ namespace STARS.Management.Controllers
 
         }
 
-        [HttpPut("user/{appuserid}")]
-        public ActionResult UpdateUser(string appuserid, UserAssignRoleDTO user)
+        [HttpPut("user/{corpuserid}")]
+        public ActionResult UpdateUser(string corpuserid, UserAssignRoleDTO user)
         {
-            _UserManagementService.UpdateUser(appuserid, UserAssignRoleDTO);
+            _UserManagementService.UpdateUser(corpuserid, user);
             return Ok();
 
         }
 
-        [HttpDelete("deleteuser/{appuserid}")]
-        public ActionResult Delete(string appuserid)
+        [HttpDelete("deleteuser/{corpuserid}")]
+        public ActionResult Delete(string corpuserid)
         {
-            _UserManagementService.DeleteUser(appuserid);
+            _UserManagementService.DeleteUser(corpuserid);
             return Ok();
 
         }
