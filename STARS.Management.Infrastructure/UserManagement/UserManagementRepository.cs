@@ -126,7 +126,7 @@ public class UserManagementRepository : IUserManagementRepository
         }
     }
 
-    public async Task UpdateUser(UserDTO userDTO)
+    public async Task UpdateUser(UserAssignRoleDTO userDTO)
     {
         try
         {
