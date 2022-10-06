@@ -56,9 +56,9 @@ namespace STARS.Management.Controllers
         }
 
         [HttpPut("user/{appuserid}")]
-        public ActionResult UpdateUser(string appuserid, UserDTO user)
+        public ActionResult UpdateUser(string appuserid, UserAssignRoleDTO user)
         {
-            _UserManagementService.UpdateUser(appuserid, user);
+            _UserManagementService.UpdateUser(appuserid, UserAssignRoleDTO);
             return Ok();
 
         }

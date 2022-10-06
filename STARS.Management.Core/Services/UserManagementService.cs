@@ -29,7 +29,7 @@ public class UserManagementService : IUserManagementService
         return _userManagementRepository.GetAllUsers().Result;
     }
 
-    public UserRolesDTO IsvalidUser(LogInDTO loginDTO)
+    public SignedInUserDTO IsvalidUser(LogInDTO loginDTO)
     {
         if (_lDAPService.IsValidADUser(loginDTO.UserName, loginDTO.Password))
         {
@@ -43,11 +43,11 @@ public class UserManagementService : IUserManagementService
                 signedInUser.FirstName = adUserInfo.GivenName;
                 signedInUser.LastName = adUserInfo.Surname;
                 signedInUser.Email = adUserInfo.Email;
-                signedInUser.AppUserId = 0;
+                signedInUser.AppUserId = user.AppUserId;
                 signedInUser.RoleId = user.RoleId;
                 signedInUser.RoleName = user.RoleDisplayName;
                 
-                return user;
+                return signedInUser;
             }
         }
 
@@ -59,7 +59,7 @@ public class UserManagementService : IUserManagementService
         throw new System.NotImplementedException();
     }
 
-    public void UpdateUser(string appuserid, UserDTO user)
+    public void UpdateUser(string appuserid, UserAssignRoleDTO user)
     {
         if (ValidateUpdateUserUser(user))
             _userManagementRepository.UpdateUser(user);
@@ -89,7 +89,7 @@ public class UserManagementService : IUserManagementService
         return false;
     }
 
-    private bool ValidateUpdateUserUser(UserDTO user)
+    private bool ValidateUpdateUserUser(UserAssignRoleDTO user)
     {
         var userinfo = _lDAPService.GetUserFromAD(user.CorpID, false);
 
