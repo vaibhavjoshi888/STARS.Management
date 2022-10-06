@@ -130,7 +130,7 @@ public class UserManagementRepository : IUserManagementRepository
     {
         try
         {
-            var queryAppUser = _QueryProviderService.GetQuery(UserSqlList._insert_app_user);
+            var queryAppUser = _QueryProviderService.GetQuery(UserSqlList.Update_app_user);
             var parameters = new DynamicParameters();
             parameters.Add("operation", "Update", DbType.String);
             parameters.Add("corpuserid", corpuserid, DbType.String);
@@ -151,7 +151,7 @@ public class UserManagementRepository : IUserManagementRepository
     {
         try
         {
-            var queryAppUser = _QueryProviderService.GetQuery(UserSqlList._insert_app_user);
+            var queryAppUser = _QueryProviderService.GetQuery(UserSqlList.delete_app_user);
             var parameters = new DynamicParameters();
             parameters.Add("operation", "Delete", DbType.String);
             parameters.Add("corpuserid",userid, DbType.String);
