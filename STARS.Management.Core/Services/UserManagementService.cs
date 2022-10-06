@@ -80,7 +80,7 @@ public class UserManagementService : IUserManagementService
 
         if (userinfo != null)
         {
-            var appuser = _userManagementRepository.GetUserByCorpUserId(user.CorpID);
+            var appuser = _userManagementRepository.GetUserByCorpUserId(user.CorpID).Result;
             if (appuser == null)
             {
                 return true;
@@ -95,7 +95,7 @@ public class UserManagementService : IUserManagementService
 
         if (userinfo != null)
         {
-            var appuser = _userManagementRepository.GetUserByCorpUserId(user.CorpID);
+            var appuser = _userManagementRepository.GetUserByCorpUserId(user.CorpID).Result;
             if (appuser != null)
             {
                 return true;
