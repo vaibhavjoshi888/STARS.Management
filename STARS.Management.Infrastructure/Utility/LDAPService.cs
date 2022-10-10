@@ -13,16 +13,20 @@ namespace STARS.Management.Infrastructure.Utility;
 public class LDAPService : ILDAPService
 {
     private DirectorySearcher search;
+    private bool IsAdEnabled;
     public LDAPService(IOptions<LDAPContext> lDapContext)
     {
         string ldapConnection = lDapContext.Value.Server;
-        DirectoryEntry dEntry = new DirectoryEntry(ldapConnection);
-        search = new DirectorySearcher(dEntry);
+        IsAdEnabled = lDapContext.Value.IsADEnabled;
+        if (IsAdEnabled)
+        {
+            DirectoryEntry dEntry = new DirectoryEntry(ldapConnection);
+            search = new DirectorySearcher(dEntry);
+        }
     }
 
     public ADUser GetUserFromAD(string userNameOrEmail, bool isEmail)
     {
-
         ADUser adUser = new ADUser();
         SearchResultCollection resultList = null;
 
@@ -92,6 +96,9 @@ public class LDAPService : ILDAPService
 
     public bool IsValidADUser(string corpUserId, string pwd)
     {
+        if (!IsAdEnabled)
+            return true;
+
         bool isValidUser = false;
 
         try

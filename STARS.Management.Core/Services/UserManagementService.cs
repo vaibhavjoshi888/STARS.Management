@@ -46,7 +46,7 @@ public class UserManagementService : IUserManagementService
                 signedInUser.AppUserId = user.AppUserId;
                 signedInUser.RoleId = user.RoleId;
                 signedInUser.RoleName = user.RoleDisplayName;
-                
+
                 return signedInUser;
             }
         }
@@ -61,8 +61,8 @@ public class UserManagementService : IUserManagementService
 
     public void UpdateUser(string corpuserid, UserAssignRoleDTO user)
     {
-        if (ValidateUpdateUserUser(corpuserid,user))
-            _userManagementRepository.UpdateUser(corpuserid,user);
+        if (ValidateUpdateUserUser(corpuserid, user))
+            _userManagementRepository.UpdateUser(corpuserid, user);
     }
 
     public void DeleteUser(string corpuserid)
@@ -74,33 +74,34 @@ public class UserManagementService : IUserManagementService
     {
         return _userManagementRepository.GetAllRoles().Result.ToList();
     }
+    
     private bool ValidateUser(UserDTO user)
     {
-        var userinfo = _lDAPService.GetUserFromAD(user.CorpID, false);
+        // var userinfo = _lDAPService.GetUserFromAD(user.CorpID, false);
 
-        if (userinfo != null)
+        // if (userinfo != null)
+        // {
+        var appuser = _userManagementRepository.GetUserByCorpUserId(user.CorpID).Result;
+        if (appuser == null)
         {
-            var appuser = _userManagementRepository.GetUserByCorpUserId(user.CorpID).Result;
-            if (appuser == null)
-            {
-                return true;
-            }
+            return true;
         }
+        //  }
         return false;
     }
 
-    private bool ValidateUpdateUserUser(string corpuserid,UserAssignRoleDTO user)
+    private bool ValidateUpdateUserUser(string corpuserid, UserAssignRoleDTO user)
     {
-        var userinfo = _lDAPService.GetUserFromAD(corpuserid, false);
+        // var userinfo = _lDAPService.GetUserFromAD(corpuserid, false);
 
-        if (userinfo != null)
+        // if (userinfo != null)
+        // {
+        var appuser = _userManagementRepository.GetUserByCorpUserId(corpuserid).Result;
+        if (appuser != null)
         {
-            var appuser = _userManagementRepository.GetUserByCorpUserId(corpuserid).Result;
-            if (appuser != null)
-            {
-                return true;
-            }
+            return true;
         }
+        //  }
         return false;
     }
 

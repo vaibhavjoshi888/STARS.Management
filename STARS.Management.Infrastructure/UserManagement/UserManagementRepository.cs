@@ -51,11 +51,11 @@ public class UserManagementRepository : IUserManagementRepository
         {
             var query = _QueryProviderService.GetQuery(UserSqlList.GetUserRole);
             var parameters = new DynamicParameters();
-            parameters.Add("@operation", "GetSignedUser", DbType.String);
+           parameters.Add("@operation", "GetSignedUser", DbType.String);
             parameters.Add("@userId", userid, DbType.String);
             using (var connection = _context.CreateConnection())
             {
-                var user = await connection.QueryAsync<UserRolesDTO>(query, userid);
+                var user = await connection.QueryAsync<UserRolesDTO>(query, parameters);
                 if (user.Any())
                     return user.SingleOrDefault();
                 else
