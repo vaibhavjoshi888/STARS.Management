@@ -39,6 +39,7 @@ public class Startup
         services.AddScoped<IUserManagementService, UserManagementService>();
         services.AddScoped<IUserManagementRepository, UserManagementRepository>();
         services.AddSingleton<IQueryProviderService, QueryProviderService>();
+services.AddCors(options => { options.AddPolicy(name: "AllowOrigin", builder => { builder.WithOrigins("https://localhost:44351", "http://localhost:4200") .AllowAnyHeader() .AllowAnyMethod(); }); });      
     }
 
     public void Configure(WebApplication app, IWebHostEnvironment env)
@@ -61,6 +62,7 @@ public class Startup
         app.UseRouting();
         app.UseAuthorization();
         app.MapControllers();
+        app.UseCors(builder => { builder .AllowAnyOrigin() .AllowAnyMethod() .AllowAnyHeader(); });
         app.Run();
     }
 }
