@@ -36,7 +36,7 @@ public class UserManagementService : IUserManagementService
             var user = _userManagementRepository.GetUserByCorpUserId(loginDTO.UserName).Result;
             if (user != null)
             {
-                var adUserInfo = _lDAPService.GetUserFromAD(loginDTO.UserName, false);
+                  var adUserInfo = _lDAPService.GetUserFromAD(loginDTO.UserName, false);
                 SignedInUserDTO signedInUser = new SignedInUserDTO();
                 signedInUser.CorpUserId = string.Format(@"CORP\{0}", adUserInfo.CorpID);
                 signedInUser.DisplayName = adUserInfo.DisplayName;
@@ -46,7 +46,17 @@ public class UserManagementService : IUserManagementService
                 signedInUser.AppUserId = user.AppUserId;
                 signedInUser.RoleId = user.RoleId;
                 signedInUser.RoleName = user.RoleDisplayName;
-
+                return signedInUser;
+            }
+            else
+            {
+                var adUserInfo = _lDAPService.GetUserFromAD(loginDTO.UserName, false);
+                SignedInUserDTO signedInUser = new SignedInUserDTO();
+                signedInUser.CorpUserId = string.Format(@"CORP\{0}", adUserInfo.CorpID);
+                signedInUser.DisplayName = adUserInfo.DisplayName;
+                signedInUser.FirstName = adUserInfo.GivenName;
+                signedInUser.LastName = adUserInfo.Surname;
+                signedInUser.Email = adUserInfo.Email;
                 return signedInUser;
             }
         }
@@ -74,7 +84,7 @@ public class UserManagementService : IUserManagementService
     {
         return _userManagementRepository.GetAllRoles().Result.ToList();
     }
-    
+
     private bool ValidateUser(UserDTO user)
     {
         // var userinfo = _lDAPService.GetUserFromAD(user.CorpID, false);
