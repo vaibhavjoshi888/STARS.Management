@@ -19,8 +19,18 @@ namespace STARS.Management.Controllers
             _UserManagementService = userManagementService;
         }
 
+        [HttpGet("getuserdetails")]
+        public ActionResult Get()
+        {
+            var users = _UserManagementService.GetAllUsers();
+            if (users != null && users.Count() != 0)
+                return Ok(users);
+            else return NotFound("Record Not Found");
+
+        }
+
         [HttpGet("getuserdetails/{username}")]
-        public ActionResult Get(string username)
+        public ActionResult GetByUsername(string username)
         {
             var users = _UserManagementService.GetAllUsers();
             if (users.Any())
@@ -40,9 +50,9 @@ namespace STARS.Management.Controllers
         }
 
         [HttpPost("user")]
-        public ActionResult SaveUser(UserDTO user)
+        public ActionResult SaveUser(UserDTO userDTO)
         {
-            _UserManagementService.SaveUser(user);
+            _UserManagementService.SaveUser(userDTO);
             return Ok();
 
         }

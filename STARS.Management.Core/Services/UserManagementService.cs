@@ -31,8 +31,8 @@ public class UserManagementService : IUserManagementService
 
     public SignedInUserDTO IsvalidUser(LogInDTO loginDTO)
     {
-        if (_lDAPService.IsValidADUser(loginDTO.UserName, loginDTO.Password))
-        {
+        // if (_lDAPService.IsValidADUser(loginDTO.UserName, loginDTO.Password))
+        // {
             var user = _userManagementRepository.GetUserByCorpUserId(loginDTO.UserName).Result;
             if (user != null)
             {
@@ -50,16 +50,15 @@ public class UserManagementService : IUserManagementService
             }
             else
             {
-                var adUserInfo = _lDAPService.GetUserFromAD(loginDTO.UserName, false);
                 SignedInUserDTO signedInUser = new SignedInUserDTO();
-                signedInUser.CorpUserId = string.Format(@"CORP\{0}", adUserInfo.CorpID);
-                signedInUser.DisplayName = adUserInfo.DisplayName;
-                signedInUser.FirstName = adUserInfo.GivenName;
-                signedInUser.LastName = adUserInfo.Surname;
-                signedInUser.Email = adUserInfo.Email;
+                signedInUser.CorpUserId = string.Format(@"CORP\{0}","thakapds");
+                signedInUser.DisplayName ="Shrikant";
+                signedInUser.FirstName = "Reddy";
+                signedInUser.LastName = "Reddy";
+                signedInUser.Email = "Reddy@shrikant.com";
                 return signedInUser;
             }
-        }
+        //}
 
         return null;
     }
