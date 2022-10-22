@@ -33,9 +33,10 @@ namespace STARS.Management.Controllers
         public ActionResult GetByUsername(string username)
         {
             var users = _UserManagementService.GetAllUsers();
-            if (users.Any())
+            if (users != null)
                 return Ok(users);
-            else return NotFound("Record Not Found");
+
+            return NotFound("Record Not Found");
 
         }
 
@@ -60,9 +61,10 @@ namespace STARS.Management.Controllers
         [HttpGet("searchuser/{searchtext}")]
         public ActionResult SearchUser(string searchtext)
         {
-            //_lDAPService.GetUserFromAD(username,false);
-            return Ok();
-
+            var users = _UserManagementService.SearchUser(searchtext);
+            if (users != null)
+                return Ok(users);
+            return NotFound("Record Not Found");
         }
 
         [HttpPut("user/{corpuserid}")]
@@ -70,7 +72,6 @@ namespace STARS.Management.Controllers
         {
             _UserManagementService.UpdateUser(corpuserid, user);
             return Ok();
-
         }
 
         [HttpDelete("deleteuser/{corpuserid}")]
@@ -78,9 +79,6 @@ namespace STARS.Management.Controllers
         {
             _UserManagementService.DeleteUser(corpuserid);
             return Ok();
-
         }
-
-
     }
 }
