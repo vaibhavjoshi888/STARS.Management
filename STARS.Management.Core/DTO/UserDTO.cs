@@ -23,4 +23,7 @@ public class UserDTO
     public string ManagerCorpID { get; set; }
     public string ThumbnailPhoto { get; set; }
     public int UserRoleId {get;set;}
+    public string CreatedBy { get; set; }
+    public DateTime CreatedDate { get; set; }
+ 
 }

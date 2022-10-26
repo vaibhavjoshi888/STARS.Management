@@ -111,7 +111,7 @@ public class UserManagementRepository : IUserManagementRepository
             parameters.Add("managercorpuserid", userDTO.ManagerCorpID, DbType.String);
             parameters.Add("managerdisplayname", userDTO.ManagerDisplayName, DbType.String);
             parameters.Add("note", "", DbType.String);
-            parameters.Add("createdby", "test", DbType.String);
+            parameters.Add("createdby",userDTO.CreatedBy, DbType.String);
             parameters.Add("activestatus", "1", DbType.String);
             parameters.Add("roleid", userDTO.UserRoleId, DbType.Int32);
 

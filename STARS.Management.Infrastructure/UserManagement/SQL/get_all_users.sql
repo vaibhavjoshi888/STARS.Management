@@ -18,4 +18,7 @@ AppUser.ManagerDisplayName,
 AppUser.ManagerEmail,
 AppUser.ManagerCorpUserId AS ManagerCorpID,
 AppUser.ThumbnailPhoto,
-UserRole.RoleId FROM AppUser  INNER join UserRole ON UserRole.AppUserId = AppUser.AppUserId WHERE AppUser.ActiveStatus='1'
+UserRole.RoleId as UserRoleId,
+AppUser.Createdby,
+AppUser.createddate,
+FROM AppUser  INNER join UserRole ON UserRole.AppUserId = AppUser.AppUserId WHERE AppUser.ActiveStatus='1'

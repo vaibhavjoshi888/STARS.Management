@@ -150,13 +150,14 @@ namespace STARS.Management.Controllers
 
 
 
+
             UserDTO user3 = new UserDTO();
-            user3.CorpID = "ABC444";
-            user3.Email = "vailbhav.joshi@gmail.com";
+            user3.CorpID = "ABC111";
+            user3.Email = "user.1@gmail.com";
             user3.Phone = "11111111";
-            user3.FullName = "Vaibhav Joshi";
-            user3.DisplayName = "Vaibhav J";
-            user3.GivenName = "Vaibhav";
+            user3.FullName = "Username1 Joshi";
+            user3.DisplayName = "Username1 j";
+            user3.GivenName = "Username1";
             user3.Surname = "Joshi";
             user3.SamaAccountName = "22222";
             user3.PhysicalDeliveryOfficeName = "vvvvvv";
@@ -175,12 +176,12 @@ namespace STARS.Management.Controllers
 
 
             UserDTO user4 = new UserDTO();
-            user4.CorpID = "ABC444";
-            user4.Email = "vailbhav.joshi@gmail.com";
+            user4.CorpID = "ABC222";
+            user4.Email = "Username2.joshi@gmail.com";
             user4.Phone = "11111111";
-            user4.FullName = "Vaibhav Joshi";
-            user4.DisplayName = "Vaibhav J";
-            user4.GivenName = "Vaibhav";
+            user4.FullName = "Username2 Joshi";
+            user4.DisplayName = "Username2 J";
+            user4.GivenName = "Username2";
             user4.Surname = "Joshi";
             user4.SamaAccountName = "22222";
             user4.PhysicalDeliveryOfficeName = "vvvvvv";
@@ -200,12 +201,12 @@ namespace STARS.Management.Controllers
 
 
             UserDTO user5 = new UserDTO();
-            user5.CorpID = "ABC444";
-            user5.Email = "vailbhav.joshi@gmail.com";
+            user5.CorpID = "ABC333";
+            user5.Email = "Username3.joshi@gmail.com";
             user5.Phone = "11111111";
-            user5.FullName = "Test1 tttt Joshi";
-            user5.DisplayName = "Vaibhav J";
-            user5.GivenName = "Vaibhav";
+            user5.FullName = "Username3 Joshi";
+            user5.DisplayName = "Username3 J";
+            user5.GivenName = "Username3";
             user5.Surname = "Joshi";
             user5.SamaAccountName = "22222";
             user5.PhysicalDeliveryOfficeName = "vvvvvv";
@@ -225,12 +226,12 @@ namespace STARS.Management.Controllers
 
 
             UserDTO user6 = new UserDTO();
-            user6.CorpID = "ABC444";
-            user6.Email = "vailbhav.joshi@gmail.com";
+            user6.CorpID = "ABC555";
+            user6.Email = "Username4.joshi@gmail.com";
             user6.Phone = "11111111";
-            user6.FullName = "Test Joshi";
-            user6.DisplayName = "Vaibhav J";
-            user6.GivenName = "Vaibhav";
+            user6.FullName = "Username4 Joshi";
+            user6.DisplayName = "Username4 J";
+            user6.GivenName = "Username4";
             user6.Surname = "Joshi";
             user6.SamaAccountName = "22222";
             user6.PhysicalDeliveryOfficeName = "vvvvvv";
