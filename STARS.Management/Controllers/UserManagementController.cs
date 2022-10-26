@@ -101,6 +101,8 @@ namespace STARS.Management.Controllers
 
         private List<UserDTO> GetSampleData()
         {
+    //         string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+    // Image1.ImageUrl = "data:image/png;base64," + base64String;
 
             UserDTO user = new UserDTO();
             user.CorpID = "ABC123";
