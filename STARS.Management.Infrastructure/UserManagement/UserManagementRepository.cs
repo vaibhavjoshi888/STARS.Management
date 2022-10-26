@@ -114,6 +114,7 @@ public class UserManagementRepository : IUserManagementRepository
             parameters.Add("createdby",userDTO.CreatedBy, DbType.String);
             parameters.Add("activestatus", "1", DbType.String);
             parameters.Add("roleid", userDTO.UserRoleId, DbType.Int32);
+            parameters.Add("thumbnail", userDTO.ThumbnailPhoto, DbType.String);
 
             using (var connection = _context.CreateConnection())
             {
