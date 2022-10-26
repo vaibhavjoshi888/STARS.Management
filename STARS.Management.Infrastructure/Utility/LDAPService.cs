@@ -235,8 +235,10 @@ public class LDAPService : ILDAPService
         return manager;
     }
 
-    public Tuple<List<ADUser>, int> SearchADUsers(string searchText, int pageZise = 25)
+
+    public List<ADUser> SearchADUsers(string searchText, int pageZise = 25)
     {
+
         string retVal = String.Empty;
         SearchResultCollection resultList = null;
         List<ADUser> adUsers = new List<ADUser>();
@@ -245,15 +247,14 @@ public class LDAPService : ILDAPService
         //fix issue with comma, dot before and after a word
         //remove characters that you specify in a character array from the beginning and end of a string.
         searchText = searchText.Trim(new Char[] { ' ', ',', '.' });
-        if (String.IsNullOrWhiteSpace(searchText))
-        {
-            return Tuple.Create(adUsers, 0);
-        }
+        
 
         if (!String.IsNullOrWhiteSpace(searchText))
         {
+            //dSearcher.Filter = string.Format("(&(objectCategory=user)(|(cn={0})(mail={0})(samaccountname={0})(samaccountname={0})(givenname={0})(sn={0})(displayName={0})))", searchText.Trim());
 
             //** With Partial Search for firstname or displayname(to fix -"rhea" - displayName=*{0}* takes very long time to search) **//
+            //dSearcher.Filter = string.Format("(&(objectCategory=user)(!userAccountControl:1.2.840.113556.1.4.803:=2)(|(cn={0})(mail={0})(samaccountname={0})(samaccountname={0})(givenname={0}*)(sn={0}*)(displayName=*{0}*)))", searchText.Trim());
             search.Filter = string.Format("(&(objectCategory=user)(!userAccountControl:1.2.840.113556.1.4.803:=2)(userAccountControl:1.2.840.113556.1.4.803:=512)(|(cn={0})(mail={0})(samaccountname={0})(samaccountname={0})(givenname={0}*)(sn={0}*)(displayName={0}*)))", searchText.Trim());
         }
 
@@ -283,49 +284,52 @@ public class LDAPService : ILDAPService
             {
                 wordList = searchText.Split(' ').ToList();
             }
-            //To  Do val function for search.filter
+
             if (wordList.Count > 1)
             {
                 if (resultList.Count < 1)
                 {
-                    //search.Filter = string.Format("(&(objectCategory=user)(!userAccountControl:1.2.840.113556.1.4.803:=2)(userAccountControl:1.2.840.113556.1.4.803:=512)((givenname={0})(sn={1})))", wordList[0].Val(), wordList[1].Val());
+                    search.Filter = string.Format("(&(objectCategory=user)(!userAccountControl:1.2.840.113556.1.4.803:=2)(userAccountControl:1.2.840.113556.1.4.803:=512)((givenname={0})(sn={1})))", wordList[0].Val(), wordList[1].Val());
                     resultList = search.FindAll();
                 }
 
                 if (resultList.Count < 1)
                 {
-                    //search.Filter = string.Format("(&(objectCategory=user)(!userAccountControl:1.2.840.113556.1.4.803:=2)(userAccountControl:1.2.840.113556.1.4.803:=512)((givenname={0})(sn={1})))", wordList[1].Val(), wordList[0].Val());
+                    search.Filter = string.Format("(&(objectCategory=user)(!userAccountControl:1.2.840.113556.1.4.803:=2)(userAccountControl:1.2.840.113556.1.4.803:=512)((givenname={0})(sn={1})))", wordList[1].Val(), wordList[0].Val());
                     resultList = search.FindAll();
                 }
 
                 if (resultList.Count < 1)
                 {
-                    //search.Filter = string.Format("(&(objectCategory=user)(!userAccountControl:1.2.840.113556.1.4.803:=2)(userAccountControl:1.2.840.113556.1.4.803:=512)((givenname={0}*)(sn={1}*)))", wordList[0].Val(), wordList[1].Val());
+                    search.Filter = string.Format("(&(objectCategory=user)(!userAccountControl:1.2.840.113556.1.4.803:=2)(userAccountControl:1.2.840.113556.1.4.803:=512)((givenname={0}*)(sn={1}*)))", wordList[0].Val(), wordList[1].Val());
                     resultList = search.FindAll();
                 }
 
                 if (resultList.Count < 1)
                 {
-                    //search.Filter = string.Format("(&(objectCategory=user)(!userAccountControl:1.2.840.113556.1.4.803:=2)(userAccountControl:1.2.840.113556.1.4.803:=512)((givenname={0}*)(sn={1}*)))", wordList[1].Val(), wordList[0].Val());
+                    search.Filter = string.Format("(&(objectCategory=user)(!userAccountControl:1.2.840.113556.1.4.803:=2)(userAccountControl:1.2.840.113556.1.4.803:=512)((givenname={0}*)(sn={1}*)))", wordList[1].Val(), wordList[0].Val());
                     resultList = search.FindAll();
                 }
 
                 if (resultList.Count < 1)
                 {
                     //eg: displayname-"datt,rhe"
-                    // search.Filter = string.Format("(&(objectCategory=user)(!userAccountControl:1.2.840.113556.1.4.803:=2)(userAccountControl:1.2.840.113556.1.4.803:=512)(|(displayName={0}*)(displayName={1}*)))", wordList[0].Val(), wordList[1].Val());
+                    search.Filter = string.Format("(&(objectCategory=user)(!userAccountControl:1.2.840.113556.1.4.803:=2)(userAccountControl:1.2.840.113556.1.4.803:=512)(|(displayName={0}*)(displayName={1}*)))", wordList[0].Val(), wordList[1].Val());
                     resultList = search.FindAll();
                 }
                 if (resultList.Count < 1)
                 {
                     //eg: displayname-"rhe,datt"
-                    //   search.Filter = string.Format("(&(objectCategory=user)(!userAccountControl:1.2.840.113556.1.4.803:=2)(userAccountControl:1.2.840.113556.1.4.803:=512)(|(displayName={0}*)(displayName={1}*)))", wordList[1].Val(), wordList[0].Val());
+                    search.Filter = string.Format("(&(objectCategory=user)(!userAccountControl:1.2.840.113556.1.4.803:=2)(userAccountControl:1.2.840.113556.1.4.803:=512)(|(displayName={0}*)(displayName={1}*)))", wordList[1].Val(), wordList[0].Val());
                     resultList = search.FindAll();
                 }
 
             }
         }
         #endregion Advanced Search by FirstName & LastName
+
+        //List<ADUser> adUsers = new List<ADUser>();
+        //string txtResult = string.Empty;
 
         //loop through results of search
         foreach (SearchResult result in resultList)
@@ -352,6 +356,12 @@ public class LDAPService : ILDAPService
             adUser.Division = (result.Properties.Contains("division")) ? result.Properties["division"][0].ToString() : "";
             adUser.ThumbnailPhoto = (result.Properties.Contains("thumbnailphoto")) ? (Byte[])result.Properties["thumbnailphoto"][0] : Array.Empty<byte>();
 
+            //string managerStr = (result.Properties.Contains("manager")) ? result.Properties["manager"][0].ToString() : "";
+            //ADUser manager = GetManagerInfo(managerStr);
+            //adUser.ManagerDisplayName = manager.DisplayName;
+            //adUser.ManagerEmail = manager.Email;
+            //adUser.ManagerCorpID = manager.CorpID;
+
             adUsers.Add(adUser);
 
 
@@ -359,9 +369,25 @@ public class LDAPService : ILDAPService
 
         int searchTotalCount = adUsers.Count;
 
-        return Tuple.Create(adUsers, searchTotalCount);
+        return adUsers;
     }
 
+}
+public static class ExtMethod
+{
+    public static string Val(this String str)
+    {
+        var strVal = string.IsNullOrWhiteSpace(str) ? String.Empty : str.Trim();
+
+        return strVal;
+    }
+
+    public static string Val(this String str, string defaultValue)
+    {
+        var strVal = string.IsNullOrWhiteSpace(str) ? defaultValue : str.Trim();
+
+        return strVal;
+    }
 }
 
 

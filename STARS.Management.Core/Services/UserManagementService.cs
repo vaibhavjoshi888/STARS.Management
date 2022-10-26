@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 using STARS.Management.Core.DTO;
 using STARS.Management.Core.Interface;
 using STARS.Management.Core.Repository;
@@ -63,10 +64,46 @@ public class UserManagementService : IUserManagementService
         return null;
     }
 
+  
     public List<UserDTO> SearchUser(string username)
     {
-        throw new System.NotImplementedException();
+        var userDto= _lDAPService.SearchADUsers(username);
+        if (userDto != null)
+        {
+            List <UserDTO> lstUserDTO= new List<UserDTO>();
+
+            foreach (var user in userDto)
+            {
+                UserDTO userDTO = new UserDTO();
+                userDTO.CorpID =user.CorpID;
+                userDTO.Email =user.Email;
+                userDTO.Phone = user.Phone;
+                userDTO.FullName = user.FullName;
+                userDTO.DisplayName = user.DisplayName;
+                userDTO.GivenName = user.GivenName;
+                userDTO.Surname = user.Surname;
+                userDTO.SamaAccountName = user.SamaAccountName;
+                userDTO.PhysicalDeliveryOfficeName = user.PhysicalDeliveryOfficeName;
+                userDTO.EmployeeType = user.EmployeeType;
+                userDTO.EmployeeId = user.EmployeeId;
+                userDTO.EmployeeNumber = user.EmployeeNumber;
+                userDTO.Title = user.Title;
+                userDTO.Department = user.Department;
+                userDTO.Division = user.Division;
+                userDTO.Manager = user.Manager;
+                userDTO.ManagerDisplayName = user.ManagerDisplayName;
+                userDTO.ManagerEmail = user.ManagerEmail;
+                userDTO.ManagerCorpID = user.ManagerCorpID;
+                userDTO.ThumbnailPhoto = JsonConvert.SerializeObject(user.ThumbnailPhoto);
+                
+                lstUserDTO.Add(userDTO);
+
+            }
+            return lstUserDTO;
+        }
+        return null;
     }
+
 
     public void UpdateUser(string corpuserid, UserAssignRoleDTO user)
     {
