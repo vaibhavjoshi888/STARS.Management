@@ -133,7 +133,6 @@ public class UserManagementRepository : IUserManagementRepository
         {
             var queryAppUser = _QueryProviderService.GetQuery(UserSqlList.Update_app_user);
             var parameters = new DynamicParameters();
-            parameters.Add("operation", "Update", DbType.String);
             parameters.Add("corpuserid", corpuserid, DbType.String);
             parameters.Add("roleid", userDTO.UserRoleId, DbType.Int32);
 
