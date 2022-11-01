@@ -14,6 +14,12 @@
     <EmbeddedResource Include="UserManagement\SQL\get_user_role.sql" />
     <EmbeddedResource Include="UserManagement\SQL\delete_app-user.sql" />
     <EmbeddedResource Include="UserManagement\SQL\update_app-user.sql" />
+    <EmbeddedResource Include="UserManagement\SQL\insert_logging_history.sql" />
+     <EmbeddedResource Include="UserManagement\SQL\get_login_history.sql" />
+     <EmbeddedResource Include="UserManagement\SQL\update_login_history.sql" />
+ <EmbeddedResource Include="UserManagement\SQL\delete_loginHistory.sql" />
+    
+     
     
   </ItemGroup>
   <PropertyGroup>

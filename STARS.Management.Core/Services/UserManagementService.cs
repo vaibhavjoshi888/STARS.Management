@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
@@ -30,70 +31,109 @@ public class UserManagementService : IUserManagementService
         return _userManagementRepository.GetAllUsers().Result;
     }
 
-    public SignedInUserDTO IsvalidUser(LogInDTO loginDTO)
+    public Tuple<bool, SignedInUserDTO> IsvalidUser(LogInDTO loginDTO)
     {
-        // if (_lDAPService.IsValidADUser(loginDTO.UserName, loginDTO.Password))
+        var adUserInfo = _lDAPService.GetUserFromAD(loginDTO.UserName, false);
+        
+        if (adUserInfo != null)
+        {
+            var loginhis = _userManagementRepository.GetLogingHistory(loginDTO.UserName).Result;
+            TimeSpan span = DateTime.Now.Subtract(loginhis.LoginTime);
+            int Minutesdiff = span.Minutes;
+            if (Minutesdiff > 10)
+                _userManagementRepository.DeleteLoginHistory(loginDTO.UserName).GetAwaiter().GetResult();
+
+            if(_lDAPService.IsValidADUser(loginDTO.UserName, loginDTO.Password))
+            {
+                _userManagementRepository.DeleteLoginHistory(loginDTO.UserName).GetAwaiter().GetResult();
+                
+                var user = _userManagementRepository.GetUserByCorpUserId(loginDTO.UserName).Result;
+                if (user != null)
+                {
+                    SignedInUserDTO signedInUser = new SignedInUserDTO();
+                    signedInUser.CorpUserId = string.Format(@"CORP\{0}", adUserInfo.CorpID);
+                    signedInUser.DisplayName = adUserInfo.DisplayName;
+                    signedInUser.FirstName = adUserInfo.GivenName;
+                    signedInUser.LastName = adUserInfo.Surname;
+                    signedInUser.Email = adUserInfo.Email;
+                    signedInUser.AppUserId = user.AppUserId;
+                    signedInUser.RoleId = user.RoleId;
+                    signedInUser.RoleName = user.RoleDisplayName;
+
+                    return Tuple.Create<bool, SignedInUserDTO>(false, signedInUser);
+                }
+                else
+                {
+                    SignedInUserDTO signedInUser = new SignedInUserDTO();
+                    signedInUser.CorpUserId = string.Format(@"CORP\{0}", adUserInfo.CorpID);
+                    signedInUser.DisplayName = adUserInfo.DisplayName;
+                    signedInUser.FirstName = adUserInfo.GivenName;
+                    signedInUser.LastName = adUserInfo.Surname;
+                    signedInUser.Email = adUserInfo.Email;
+                    return Tuple.Create<bool, SignedInUserDTO>(false, signedInUser);
+
+                }
+            }
+            else
+            {
+                if (loginhis.LoginAttempt >= 3)
+                {
+                    return Tuple.Create<bool, SignedInUserDTO>(true, null);
+                }
+
+                if (loginhis.UserName == null)
+                {
+                    LogInHistoryDTO logInHistoryDTO = new LogInHistoryDTO();
+                    logInHistoryDTO.UserName = loginDTO.UserName;
+                    logInHistoryDTO.LoginTime = DateTime.Now;
+                    logInHistoryDTO.LoginAttempt = 1;
+                    _userManagementRepository.InsertLogingHistory(logInHistoryDTO);
+                }
+                else
+                {
+                    _userManagementRepository.UpdateLoginHistory(loginDTO.UserName);
+                }
+                return Tuple.Create<bool, SignedInUserDTO>(false, null);
+            }
+        }
+        else
+        {
+            return Tuple.Create<bool, SignedInUserDTO>(false, null);
+        }
+
+
+        // if (loginDTO.UserName == "shree")
         // {
 
-        //     var adUserInfo = _lDAPService.GetUserFromAD(loginDTO.UserName, false);
-        //     var user = _userManagementRepository.GetUserByCorpUserId(loginDTO.UserName).Result;
-        //     if (user != null)
-        //     {
-        //         SignedInUserDTO signedInUser = new SignedInUserDTO();
-        //         signedInUser.CorpUserId = string.Format(@"CORP\{0}", adUserInfo.CorpID);
-        //         signedInUser.DisplayName = adUserInfo.DisplayName;
-        //         signedInUser.FirstName = adUserInfo.GivenName;
-        //         signedInUser.LastName = adUserInfo.Surname;
-        //         signedInUser.Email = adUserInfo.Email;
-        //         signedInUser.AppUserId = user.AppUserId;
-        //         signedInUser.RoleId = user.RoleId;
-        //         signedInUser.RoleName = user.RoleDisplayName;
-        //         return signedInUser;
-
-        //     }
-        //     else
-        //     {
-        //         SignedInUserDTO signedInUser = new SignedInUserDTO();
-        //         signedInUser.CorpUserId = string.Format(@"CORP\{0}", adUserInfo.CorpID);
-        //         signedInUser.DisplayName = adUserInfo.DisplayName;
-        //         signedInUser.FirstName = adUserInfo.GivenName;
-        //         signedInUser.LastName = adUserInfo.Surname;
-        //         signedInUser.Email = adUserInfo.Email;
-
-        //     }
+        //     SignedInUserDTO sss = new SignedInUserDTO();
+        //     sss.AppUserId = 0;
+        //     sss.CorpUserId = "Vaibhav";
+        //     sss.Email = "shrinith.sanil@gmail.com";
+        //     sss.DisplayName = "Shrinith S";
+        //     sss.FirstName = "Shrinith";
+        //     sss.LastName = "Sanil";
+        //     sss.RoleId = 1;
+        //     sss.RoleName = "Software Developer";
+        //     sss.Initial = "SSS";
+        //     sss.ThumbnailPhoto = null;
+        //     sss.HasThumbnailPhoto = false;
+        //     sss.CanViewDailySchedule = false;
+        //     return sss;
         // }
-        if (loginDTO.UserName == "shree")
-        {
+        // else if (loginDTO.UserName == "shree1")
+        // {
 
-            SignedInUserDTO sss = new SignedInUserDTO();
-            sss.AppUserId = 0;
-            sss.CorpUserId = "Vaibhav";
-            sss.Email = "shrinith.sanil@gmail.com";
-            sss.DisplayName = "Shrinith S";
-            sss.FirstName = "Shrinith";
-            sss.LastName = "Sanil";
-            sss.RoleId = 1;
-            sss.RoleName = "Software Developer";
-            sss.Initial = "SSS";
-            sss.ThumbnailPhoto = null;
-            sss.HasThumbnailPhoto = false;
-            sss.CanViewDailySchedule = false;
-            return sss;
-        }
-        else if (loginDTO.UserName == "shree1")
-        {
-
-            SignedInUserDTO signedInUser = new SignedInUserDTO();
-            signedInUser.CorpUserId = string.Format(@"CORP\{0}", "thakapds");
-            signedInUser.DisplayName = "Shrikant";
-            signedInUser.FirstName = "Reddy";
-            signedInUser.LastName = "Reddy";
-            signedInUser.Email = "Reddy@shrikant.com";
-            return signedInUser;
-        }
-        else{
-            return null;
-        }
+        //     SignedInUserDTO signedInUser = new SignedInUserDTO();
+        //     signedInUser.CorpUserId = string.Format(@"CORP\{0}", "thakapds");
+        //     signedInUser.DisplayName = "Shrikant";
+        //     signedInUser.FirstName = "Reddy";
+        //     signedInUser.LastName = "Reddy";
+        //     signedInUser.Email = "Reddy@shrikant.com";
+        //     return signedInUser;
+        // }
+        // else{
+        //     return null;
+        // }
 
     }
 

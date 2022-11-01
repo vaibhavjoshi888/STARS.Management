@@ -46,9 +46,14 @@ namespace STARS.Management.Controllers
         {
 
             var userDto = _UserManagementService.IsvalidUser(loginDTO);
-            if (userDto != null)
-               return Ok(userDto);
-            return BadRequest("Error with credential or user not found");
+
+            if (userDto.Item2 != null)
+                return Ok(userDto);
+
+            if (userDto.Item1)
+                return BadRequest("Multiple login attempt failed try after sometime");
+            else
+                 return BadRequest("Error with credential or user not found");
         }
 
         [HttpPost("user")]

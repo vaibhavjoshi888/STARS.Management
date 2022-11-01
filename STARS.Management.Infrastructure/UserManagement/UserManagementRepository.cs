@@ -51,7 +51,7 @@ public class UserManagementRepository : IUserManagementRepository
         {
             var query = _QueryProviderService.GetQuery(UserSqlList.GetUserRole);
             var parameters = new DynamicParameters();
-           parameters.Add("@operation", "GetSignedUser", DbType.String);
+            parameters.Add("@operation", "GetSignedUser", DbType.String);
             parameters.Add("@userId", userid, DbType.String);
             using (var connection = _context.CreateConnection())
             {
@@ -111,7 +111,7 @@ public class UserManagementRepository : IUserManagementRepository
             parameters.Add("managercorpuserid", userDTO.ManagerCorpID, DbType.String);
             parameters.Add("managerdisplayname", userDTO.ManagerDisplayName, DbType.String);
             parameters.Add("note", "", DbType.String);
-            parameters.Add("createdby",userDTO.CreatedBy, DbType.String);
+            parameters.Add("createdby", userDTO.CreatedBy, DbType.String);
             parameters.Add("activestatus", "1", DbType.String);
             parameters.Add("roleid", userDTO.UserRoleId, DbType.Int32);
             parameters.Add("thumbnail", userDTO.ThumbnailPhoto, DbType.String);
@@ -127,7 +127,7 @@ public class UserManagementRepository : IUserManagementRepository
         }
     }
 
-    public async Task UpdateUser(string corpuserid,UserAssignRoleDTO userDTO)
+    public async Task UpdateUser(string corpuserid, UserAssignRoleDTO userDTO)
     {
         try
         {
@@ -146,15 +146,15 @@ public class UserManagementRepository : IUserManagementRepository
             throw ex;
         }
     }
-    
-     public async Task DeleteUser(string userid)
+
+    public async Task DeleteUser(string userid)
     {
         try
         {
             var queryAppUser = _QueryProviderService.GetQuery(UserSqlList.delete_app_user);
             var parameters = new DynamicParameters();
             parameters.Add("operation", "Delete", DbType.String);
-            parameters.Add("corpuserid",userid, DbType.String);
+            parameters.Add("corpuserid", userid, DbType.String);
             using (var connection = _context.CreateConnection())
             {
                 var identity = await connection.ExecuteAsync(queryAppUser, parameters);
@@ -165,4 +165,88 @@ public class UserManagementRepository : IUserManagementRepository
             throw ex;
         }
     }
+
+    public async Task InsertLogingHistory(LogInHistoryDTO logInHistoryDTO)
+    {
+        try
+        {
+
+            var queryAppUser = _QueryProviderService.GetQuery(UserSqlList.Insert_Login_History);
+            var parameters = new DynamicParameters();
+            parameters.Add("username", logInHistoryDTO.UserName, DbType.String);
+            parameters.Add("logintime", logInHistoryDTO.LoginTime, DbType.DateTime);
+            parameters.Add("loginattempt", logInHistoryDTO.LoginAttempt, DbType.Int32);
+
+            using (var connection = _context.CreateConnection())
+            {
+                var identity = await connection.ExecuteAsync(queryAppUser, parameters);
+            }
+
+        }
+        catch (System.Exception)
+        {
+
+            throw;
+        }
+    }
+
+    public async Task<LogInHistoryDTO> GetLogingHistory(string CorpUserId)
+    {
+        try
+        {
+            var query = _QueryProviderService.GetQuery(UserSqlList.Get_Login_History);
+            var parameters = new DynamicParameters();
+            parameters.Add("@userId", CorpUserId, DbType.String);
+            using (var connection = _context.CreateConnection())
+            {
+                var user = await connection.QueryAsync<LogInHistoryDTO>(query, parameters);
+                if (user.Any())
+                    return user.SingleOrDefault();
+                else
+                    return new LogInHistoryDTO();
+            }
+
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+    public async Task UpdateLoginHistory(string corpuserid)
+    {
+        try
+        {
+            var queryAppUser = _QueryProviderService.GetQuery(UserSqlList.Update_Login_History);
+            var parameters = new DynamicParameters();
+            parameters.Add("corpuserid", corpuserid, DbType.String);
+            using (var connection = _context.CreateConnection())
+            {
+                var identity = await connection.ExecuteAsync(queryAppUser, parameters);
+            }
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+
+    public async Task DeleteLoginHistory(string userid)
+    {
+        try
+        {
+            var queryAppUser = _QueryProviderService.GetQuery(UserSqlList.Delete_Login_History);
+            var parameters = new DynamicParameters();
+            parameters.Add("corpuserid", userid, DbType.String);
+            using (var connection = _context.CreateConnection())
+            {
+                var identity = await connection.ExecuteAsync(queryAppUser, parameters);
+            }
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+
+
 }
