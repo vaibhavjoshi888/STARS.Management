@@ -48,7 +48,7 @@ namespace STARS.Management.Controllers
             var userDto = _UserManagementService.IsvalidUser(loginDTO);
 
             if (userDto.Item2 != null)
-                return Ok(userDto);
+                return Ok(userDto.Item2);
 
             if (userDto.Item1)
                 return BadRequest("Multiple login attempt failed try after sometime");

@@ -35,12 +35,12 @@ public class UserManagementService : IUserManagementService
     {
         var adUserInfo = _lDAPService.GetUserFromAD(loginDTO.UserName, false);
         
-        if (adUserInfo != null)
+        if (adUserInfo.CorpID == null)
         {
             var loginhis = _userManagementRepository.GetLogingHistory(loginDTO.UserName).Result;
             TimeSpan span = DateTime.Now.Subtract(loginhis.LoginTime);
             int Minutesdiff = span.Minutes;
-            if (Minutesdiff > 10)
+            if (Minutesdiff > 10 && loginhis.UserName !=null)
                 _userManagementRepository.DeleteLoginHistory(loginDTO.UserName).GetAwaiter().GetResult();
 
             if(_lDAPService.IsValidADUser(loginDTO.UserName, loginDTO.Password))
