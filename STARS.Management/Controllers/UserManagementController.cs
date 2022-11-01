@@ -44,26 +44,11 @@ namespace STARS.Management.Controllers
         [HttpPost("isvaliduser")]
         public ActionResult IsvalidUser(LogInDTO loginDTO)
         {
-            SignedInUserDTO sss = new SignedInUserDTO();
-            sss.AppUserId = 0;
-            sss.CorpUserId = "Shrinith";
-            sss.Email = "shrinith.sanil@gmail.com";
-            sss.DisplayName = "Shrinith S";
-            sss.FirstName = "Shrinith";
-            sss.LastName = "Sanil";
-            sss.RoleId = 1;
-            sss.RoleName = "Software Developer";
-            sss.Initial = "SSS";
-            sss.ThumbnailPhoto = null;
-            sss.HasThumbnailPhoto = false;
-            sss.CanViewDailySchedule = false;
 
-            return Ok(sss); ;
-
-            //var userDto = _UserManagementService.IsvalidUser(loginDTO);
-            //if (userDto != null)
-            //    return Ok(userDto);
-            //return BadRequest("Error with credential or user not found");
+            var userDto = _UserManagementService.IsvalidUser(loginDTO);
+            if (userDto != null)
+               return Ok(userDto);
+            return BadRequest("Error with credential or user not found");
         }
 
         [HttpPost("user")]
