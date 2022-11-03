@@ -3,9 +3,26 @@
     <ProjectReference Include="..\STARS.Management.Core\STARS.Management.Core.csproj" />
     <PackageReference Include="System.DirectoryServices" Version="6.0.0" />
     <PackageReference Include="System.DirectoryServices.AccountManagement" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.0" />
+    <PackageReference Include="Dapper" Version="2.0.123" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UserManagement\SQL\insert_app-user.sql" />
+    <EmbeddedResource Include="UserManagement\SQL\get_all_users.sql" />
+    <EmbeddedResource Include="UserManagement\SQL\get_all_roles.sql" />
+    <EmbeddedResource Include="UserManagement\SQL\get_user_role.sql" />
+    <EmbeddedResource Include="UserManagement\SQL\delete_app-user.sql" />
+    <EmbeddedResource Include="UserManagement\SQL\update_app-user.sql" />
+    <EmbeddedResource Include="UserManagement\SQL\insert_logging_history.sql" />
+     <EmbeddedResource Include="UserManagement\SQL\get_login_history.sql" />
+     <EmbeddedResource Include="UserManagement\SQL\update_login_history.sql" />
+ <EmbeddedResource Include="UserManagement\SQL\delete_loginHistory.sql" />
+    
+     
+    
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    
   </PropertyGroup>
 </Project>

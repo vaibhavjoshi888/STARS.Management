@@ -1,0 +1,1 @@
+exec usp_app_user_operation @operation,@corpuserid

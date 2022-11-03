@@ -1,0 +1,1 @@
+DELETE FROM LoginHistory WHERE UserName = @corpuserid
