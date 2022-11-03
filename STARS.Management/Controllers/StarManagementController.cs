@@ -19,5 +19,47 @@ namespace STARS.Management.Controllers
             _StarManagementService = starManagementService;
         }
 
+        [HttpPost("submitstarrequest")]
+        public ActionResult SubmitStarRequest(UserDTO userDTO)
+        {
+            return Ok();
+
+        }
+
+        [HttpPut("updatestarrequest/{corpuserid}")]
+        public ActionResult UpdateStarRequest(string corpuserid, UserAssignRoleDTO user)
+        {
+            return Ok();
+        }
+
+        [HttpGet("getstarreaquest")]
+        public ActionResult GetStarReaquest()
+        {
+
+            return Ok();
+
+        }
+
+        [HttpGet("getallactivestars")]
+        public ActionResult GetAllActiveStars()
+        {
+
+            return Ok();
+
+        }
+
+        [HttpGet("getrecentstars")]
+        public ActionResult GetRecentStars()
+        {
+            return Ok();
+
+        }
+
+        [HttpGet("getStarreaquestcount")]
+        public ActionResult GetStarReaquestCount()
+        {
+            return Ok();
+
+        }
     }
 }

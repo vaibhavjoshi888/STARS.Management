@@ -18,6 +18,9 @@
      <EmbeddedResource Include="UserManagement\SQL\get_login_history.sql" />
      <EmbeddedResource Include="UserManagement\SQL\update_login_history.sql" />
  <EmbeddedResource Include="UserManagement\SQL\delete_loginHistory.sql" />
+
+<EmbeddedResource Include="StarManagement\SQL\insert_submit_star_config.sql" />
+
     
      
     

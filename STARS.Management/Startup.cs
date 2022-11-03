@@ -9,6 +9,7 @@ using STARS.Management.Core.Models;
 using STARS.Management.Core.Repository;
 using STARS.Management.Core.Services;
 using STARS.Management.Infrastructure.Context;
+using STARS.Management.Infrastructure.StarManagement;
 using STARS.Management.Infrastructure.UserManagement;
 using STARS.Management.Infrastructure.Utility;
 
@@ -38,8 +39,11 @@ public class Startup
         services.AddSingleton<ILDAPService, LDAPService>();
         services.AddScoped<IUserManagementService, UserManagementService>();
         services.AddScoped<IUserManagementRepository, UserManagementRepository>();
+        services.AddScoped<IStarManagementService, StarManagementService>();
+        services.AddScoped<IStarManagementRepository, StarManagementRepository>();
+
         services.AddSingleton<IQueryProviderService, QueryProviderService>();
-services.AddCors(options => { options.AddPolicy(name: "AllowOrigin", builder => { builder.WithOrigins("https://localhost:44351", "http://localhost:4200") .AllowAnyHeader() .AllowAnyMethod(); }); });      
+        services.AddCors(options => { options.AddPolicy(name: "AllowOrigin", builder => { builder.WithOrigins("https://localhost:44351", "http://localhost:4200").AllowAnyHeader().AllowAnyMethod(); }); });
     }
 
     public void Configure(WebApplication app, IWebHostEnvironment env)
@@ -62,7 +66,7 @@ services.AddCors(options => { options.AddPolicy(name: "AllowOrigin", builder => 
         app.UseRouting();
         app.UseAuthorization();
         app.MapControllers();
-        app.UseCors(builder => { builder .AllowAnyOrigin() .AllowAnyMethod() .AllowAnyHeader(); });
+        app.UseCors(builder => { builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); });
         app.Run();
     }
 }
