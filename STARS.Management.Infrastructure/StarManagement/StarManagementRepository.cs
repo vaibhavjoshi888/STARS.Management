@@ -22,5 +22,31 @@ public class StarManagementRepository : IStarManagementRepository
         _QueryProviderService = QueryProviderService;
     }
 
+    public async Task CreateUser(UserDTO userDTO)
+    {
+        try
+        {
+            var queryAppUser = _QueryProviderService.GetQuery(UserSqlList._insert_app_user);
+            var parameters = new DynamicParameters();
+            parameters.Add("corpuserid", userDTO.CorpID, DbType.String);
+            parameters.Add("message", userDTO.Email, DbType.String);
+            parameters.Add("status", "P", DbType.String);
+            parameters.Add("employeename", userDTO.EmployeeNumber, DbType.String);
+            parameters.Add("note", "", DbType.String);
+            parameters.Add("createdby", userDTO.CreatedBy, DbType.String);
+            parameters.Add("isactive", "1", DbType.String);
+            parameters.Add("thumbnail", userDTO.ThumbnailPhoto, DbType.String);
+
+            using (var connection = _context.CreateConnection())
+            {
+                var identity = await connection.ExecuteAsync(queryAppUser, parameters);
+            }
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+
 
 }
