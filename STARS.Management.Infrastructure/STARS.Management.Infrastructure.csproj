@@ -19,11 +19,10 @@
      <EmbeddedResource Include="UserManagement\SQL\update_login_history.sql" />
  <EmbeddedResource Include="UserManagement\SQL\delete_loginHistory.sql" />
 
-<EmbeddedResource Include="StarManagement\SQL\insert_submit_star_config.sql" />
-
-    
+  <EmbeddedResource Include="StarManagement\SQL\insert_submit_star_config.sql" />
+  <EmbeddedResource Include="StarManagement\SQL\get_all_user_star_config_request.sql" />
+  <EmbeddedResource Include="StarManagement\SQL\updatel_star_request.sql" />
      
-    
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>

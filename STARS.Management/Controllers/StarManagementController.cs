@@ -20,8 +20,9 @@ namespace STARS.Management.Controllers
         }
 
         [HttpPost("submitstarrequest")]
-        public ActionResult SubmitStarRequest(UserDTO userDTO)
+        public ActionResult SubmitStarRequest(UserStarConfigurationDTO userStarConfigurationDTO)
         {
+            _StarManagementService.SubmitStarRequest(userStarConfigurationDTO);
             return Ok();
 
         }

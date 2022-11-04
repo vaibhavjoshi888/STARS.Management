@@ -8,6 +8,7 @@ using STARS.Management.Core.DTO;
 using STARS.Management.Core.Interface;
 using STARS.Management.Core.Repository;
 using STARS.Management.Infrastructure.Context;
+using STARS.Management.Infrastructure.StarManagement.SQL;
 using STARS.Management.Infrastructure.UserManagement.SQL;
 
 namespace STARS.Management.Infrastructure.StarManagement;
@@ -22,21 +23,65 @@ public class StarManagementRepository : IStarManagementRepository
         _QueryProviderService = QueryProviderService;
     }
 
-    public async Task CreateUser(UserDTO userDTO)
+    public async Task SubmitStarRequest(UserStarConfigurationDTO userStarConfigurationDTO)
     {
         try
         {
-            var queryAppUser = _QueryProviderService.GetQuery(UserSqlList._insert_app_user);
+            var queryAppUser = _QueryProviderService.GetQuery(StarSqlList.Insert_Submit_Star_Config);
             var parameters = new DynamicParameters();
-            parameters.Add("corpuserid", userDTO.CorpID, DbType.String);
-            parameters.Add("message", userDTO.Email, DbType.String);
+            parameters.Add("corpuserid", userStarConfigurationDTO.CorpUserId, DbType.String);
+            parameters.Add("message", userStarConfigurationDTO.Message, DbType.String);
             parameters.Add("status", "P", DbType.String);
-            parameters.Add("employeename", userDTO.EmployeeNumber, DbType.String);
-            parameters.Add("note", "", DbType.String);
-            parameters.Add("createdby", userDTO.CreatedBy, DbType.String);
+            parameters.Add("employeename", userStarConfigurationDTO.EmployeeName, DbType.String);
+            parameters.Add("createdby", userStarConfigurationDTO.CreatedBy, DbType.String);
             parameters.Add("isactive", "1", DbType.String);
-            parameters.Add("thumbnail", userDTO.ThumbnailPhoto, DbType.String);
+            parameters.Add("thumbnail", userStarConfigurationDTO.ThumbnailPhoto, DbType.String);
 
+            using (var connection = _context.CreateConnection())
+            {
+                var identity = await connection.ExecuteAsync(queryAppUser, parameters);
+            }
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+
+    public async Task<IEnumerable<UserStarConfigurationDTO>> GetAllStarRequest()
+    {
+        try
+        {
+            var query = _QueryProviderService.GetQuery(StarSqlList.Get_all_user_star_config_request);
+            using (var connection = _context.CreateConnection())
+            {
+                var userStarConfigDTOs = await connection.QueryAsync<UserStarConfigurationDTO>(query);
+                if (userStarConfigDTOs.Any())
+                    return userStarConfigDTOs;
+                else
+                    return null;
+            }
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+
+    public async Task UpdateStarRequest(string corpuserid, UpdateStarRequestDTO UpdateStarRequestDTO)
+    {
+        try
+        {
+            var queryAppUser = _QueryProviderService.GetQuery(StarSqlList.Updatel_star_request);
+            var parameters = new DynamicParameters();
+            parameters.Add("corpuserid", corpuserid, DbType.String);
+            parameters.Add("corpuserid", corpuserid, DbType.String);
+            parameters.Add("corpuserid", corpuserid, DbType.String);
+            parameters.Add("corpuserid", corpuserid, DbType.String);
+            parameters.Add("corpuserid", corpuserid, DbType.String);
+            parameters.Add("corpuserid", corpuserid, DbType.String);
+            parameters.Add("corpuserid", corpuserid, DbType.String);
+            parameters.Add("corpuserid", corpuserid, DbType.String);
             using (var connection = _context.CreateConnection())
             {
                 var identity = await connection.ExecuteAsync(queryAppUser, parameters);

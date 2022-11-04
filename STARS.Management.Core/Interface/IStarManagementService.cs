@@ -7,5 +7,5 @@ namespace STARS.Management.Core.Interface;
 
 public interface IStarManagementService
 {
-
+    public void SubmitStarRequest(UserStarConfigurationDTO userStarConfigurationDTO);
 }

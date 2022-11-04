@@ -6,6 +6,8 @@ namespace STARS.Management.Core.Repository;
 
 public interface IStarManagementRepository
 {
+    public  Task SubmitStarRequest(UserStarConfigurationDTO userStarConfigurationDTO);
+    public  Task<IEnumerable<UserStarConfigurationDTO>> GetAllStarRequest();
 
 }
 
