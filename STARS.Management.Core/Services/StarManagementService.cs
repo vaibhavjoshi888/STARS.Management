@@ -23,7 +23,12 @@ public class StarManagementService : IStarManagementService
 
     public IEnumerable<UserStarConfigurationDTO> GetAllStarRequest()
     {
-        throw new NotImplementedException();
+       return _starManagementRepository.GetAllStarRequest().Result;
+    }
+
+    public StarRequestCountDTO GetStarRequestCount()
+    {
+      return _starManagementRepository.GetStarRequestCount().Result;
     }
 
     public void SubmitStarRequest(UserStarConfigurationDTO userStarConfigurationDTO)
@@ -33,6 +38,6 @@ public class StarManagementService : IStarManagementService
 
     public void UpdateStarRequest(string userstarid, UpdateStarRequestDTO UpdateStarRequestDTO)
     {
-        throw new NotImplementedException();
+       _starManagementRepository.UpdateStarRequest(userstarid,UpdateStarRequestDTO);
     }
 }

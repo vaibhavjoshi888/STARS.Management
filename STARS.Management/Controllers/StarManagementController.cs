@@ -38,31 +38,28 @@ namespace STARS.Management.Controllers
         public ActionResult GetStarReaquest()
         {
 
-            _StarManagementService.GetAllStarRequest();
-            return Ok();
+           var stars= _StarManagementService.GetAllStarRequest();
+            return Ok(stars);
 
         }
 
         [HttpGet("getallactivestars")]
         public ActionResult GetAllActiveStars()
         {
-
             return Ok();
-
         }
 
         [HttpGet("getrecentstars")]
         public ActionResult GetRecentStars()
         {
             return Ok();
-
         }
 
         [HttpGet("getStarreaquestcount")]
         public ActionResult GetStarReaquestCount()
         {
-            return Ok();
-
+             var stars= _StarManagementService.GetStarRequestCount();
+            return Ok(stars);
         }
     }
 }

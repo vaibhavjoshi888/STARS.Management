@@ -93,6 +93,26 @@ public class StarManagementRepository : IStarManagementRepository
             throw ex;
         }
     }
+     public async Task<StarRequestCountDTO> GetStarRequestCount()
+    {
+        try
+        {
+            var query = _QueryProviderService.GetQuery(StarSqlList.Get_star_request_count);
+            using (var connection = _context.CreateConnection())
+            {
+                var starRequestCountDTO = await connection.QueryAsync<StarRequestCountDTO>(query);
+                if (starRequestCountDTO.Any())
+                    return starRequestCountDTO.SingleOrDefault();
+                else
+                    return null;
+            }
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+    
 
 
 }

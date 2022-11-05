@@ -1,0 +1,1 @@
+SELECT 100 AS TotalSubmitted,10 AS Approved,10 AS Pending,10 AS Denied
