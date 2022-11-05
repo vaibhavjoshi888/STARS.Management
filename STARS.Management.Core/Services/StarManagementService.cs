@@ -21,8 +21,18 @@ public class StarManagementService : IStarManagementService
         _lDAPService = lDAPService;
     }
 
+    public IEnumerable<UserStarConfigurationDTO> GetAllStarRequest()
+    {
+        throw new NotImplementedException();
+    }
+
     public void SubmitStarRequest(UserStarConfigurationDTO userStarConfigurationDTO)
     {
         _starManagementRepository.SubmitStarRequest(userStarConfigurationDTO).GetAwaiter().GetResult();
+    }
+
+    public void UpdateStarRequest(string userstarid, UpdateStarRequestDTO UpdateStarRequestDTO)
+    {
+        throw new NotImplementedException();
     }
 }
