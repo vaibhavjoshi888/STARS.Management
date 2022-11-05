@@ -28,8 +28,9 @@ namespace STARS.Management.Controllers
         }
 
         [HttpPut("updatestarrequest/{userstarid}")]
-        public ActionResult UpdateStarRequest(string userstarid, UpdateStarRequestDTO user)
+        public ActionResult UpdateStarRequest(string userstarid, UpdateStarRequestDTO updateStarRequestDTO)
         {
+             _StarManagementService.UpdateStarRequest(userstarid,updateStarRequestDTO);
             return Ok();
         }
 
@@ -37,6 +38,7 @@ namespace STARS.Management.Controllers
         public ActionResult GetStarReaquest()
         {
 
+            _StarManagementService.GetAllStarRequest();
             return Ok();
 
         }
