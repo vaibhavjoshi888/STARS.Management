@@ -68,20 +68,21 @@ public class StarManagementRepository : IStarManagementRepository
         }
     }
 
-    public async Task UpdateStarRequest(string corpuserid, UpdateStarRequestDTO UpdateStarRequestDTO)
+    public async Task UpdateStarRequest(string userstarid, UpdateStarRequestDTO UpdateStarRequestDTO)
     {
         try
         {
+            
             var queryAppUser = _QueryProviderService.GetQuery(StarSqlList.Updatel_star_request);
             var parameters = new DynamicParameters();
-            parameters.Add("corpuserid", corpuserid, DbType.String);
-            parameters.Add("corpuserid", corpuserid, DbType.String);
-            parameters.Add("corpuserid", corpuserid, DbType.String);
-            parameters.Add("corpuserid", corpuserid, DbType.String);
-            parameters.Add("corpuserid", corpuserid, DbType.String);
-            parameters.Add("corpuserid", corpuserid, DbType.String);
-            parameters.Add("corpuserid", corpuserid, DbType.String);
-            parameters.Add("corpuserid", corpuserid, DbType.String);
+            parameters.Add("message", UpdateStarRequestDTO.Message, DbType.String);
+            parameters.Add("status", UpdateStarRequestDTO.Status, DbType.String);
+            parameters.Add("approvedby", UpdateStarRequestDTO.Approvedby, DbType.String);
+            parameters.Add("feedback", UpdateStarRequestDTO.Feedback, DbType.String);
+            parameters.Add("modifiedby", UpdateStarRequestDTO.ModifiedBy, DbType.String);
+            parameters.Add("userstarid", userstarid, DbType.String);
+             parameters.Add("userstarid", UpdateStarRequestDTO.CorpUserId, DbType.String);
+       
             using (var connection = _context.CreateConnection())
             {
                 var identity = await connection.ExecuteAsync(queryAppUser, parameters);

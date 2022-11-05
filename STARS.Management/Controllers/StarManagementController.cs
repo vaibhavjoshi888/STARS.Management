@@ -27,8 +27,8 @@ namespace STARS.Management.Controllers
 
         }
 
-        [HttpPut("updatestarrequest/{corpuserid}")]
-        public ActionResult UpdateStarRequest(string corpuserid, UserAssignRoleDTO user)
+        [HttpPut("updatestarrequest/{userstarid}")]
+        public ActionResult UpdateStarRequest(string userstarid, UpdateStarRequestDTO user)
         {
             return Ok();
         }

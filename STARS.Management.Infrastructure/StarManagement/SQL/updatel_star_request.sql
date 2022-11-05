@@ -3,8 +3,8 @@ SET Message = @message,
 	Status = @status,
 	Approvedby = @approvedby,
 	Feedback = @feedback,
-	StarStartDate = @starstartdate,
-	StarEndDate = @starenddate,
+	StarStartDate =getdate(),
+	StarEndDate = getdate(),
 	ModifiedBy = @modifiedby,
-	ModifiedDate = @modifieddate
+	ModifiedDate =getdate()
 WHERE UserStarId=@userstarid AND CorpUserId=@corpuserid
