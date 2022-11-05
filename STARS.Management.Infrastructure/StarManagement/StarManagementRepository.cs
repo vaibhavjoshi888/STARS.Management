@@ -72,7 +72,7 @@ public class StarManagementRepository : IStarManagementRepository
     {
         try
         {
-            
+
             var queryAppUser = _QueryProviderService.GetQuery(StarSqlList.Updatel_star_request);
             var parameters = new DynamicParameters();
             parameters.Add("message", UpdateStarRequestDTO.Message, DbType.String);
@@ -81,8 +81,8 @@ public class StarManagementRepository : IStarManagementRepository
             parameters.Add("feedback", UpdateStarRequestDTO.Feedback, DbType.String);
             parameters.Add("modifiedby", UpdateStarRequestDTO.ModifiedBy, DbType.String);
             parameters.Add("userstarid", userstarid, DbType.String);
-             parameters.Add("userstarid", UpdateStarRequestDTO.CorpUserId, DbType.String);
-       
+            parameters.Add("userstarid", UpdateStarRequestDTO.CorpUserId, DbType.String);
+
             using (var connection = _context.CreateConnection())
             {
                 var identity = await connection.ExecuteAsync(queryAppUser, parameters);
@@ -93,7 +93,7 @@ public class StarManagementRepository : IStarManagementRepository
             throw ex;
         }
     }
-     public async Task<StarRequestCountDTO> GetStarRequestCount()
+    public async Task<StarRequestCountDTO> GetStarRequestCount()
     {
         try
         {
@@ -112,7 +112,26 @@ public class StarManagementRepository : IStarManagementRepository
             throw ex;
         }
     }
-    
+
+    public async Task<IEnumerable<StarsDTO>> GetAllActiveStar()
+    {
+        try
+        {
+            var query = _QueryProviderService.GetQuery(StarSqlList.Get_all_active_star);
+            using (var connection = _context.CreateConnection())
+            {
+                var starDTO = await connection.QueryAsync<StarsDTO>(query);
+                if (starDTO.Any())
+                    return starDTO;
+                else
+                    return null;
+            }
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
 
 
 }

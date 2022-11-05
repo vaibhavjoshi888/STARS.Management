@@ -21,14 +21,19 @@ public class StarManagementService : IStarManagementService
         _lDAPService = lDAPService;
     }
 
+    public IEnumerable<StarsDTO> GetAllActiveStar()
+    {
+        return _starManagementRepository.GetAllActiveStar().Result;
+    }
+
     public IEnumerable<UserStarConfigurationDTO> GetAllStarRequest()
     {
-       return _starManagementRepository.GetAllStarRequest().Result;
+        return _starManagementRepository.GetAllStarRequest().Result;
     }
 
     public StarRequestCountDTO GetStarRequestCount()
     {
-      return _starManagementRepository.GetStarRequestCount().Result;
+        return _starManagementRepository.GetStarRequestCount().Result;
     }
 
     public void SubmitStarRequest(UserStarConfigurationDTO userStarConfigurationDTO)
@@ -38,6 +43,6 @@ public class StarManagementService : IStarManagementService
 
     public void UpdateStarRequest(string userstarid, UpdateStarRequestDTO UpdateStarRequestDTO)
     {
-       _starManagementRepository.UpdateStarRequest(userstarid,UpdateStarRequestDTO);
+        _starManagementRepository.UpdateStarRequest(userstarid, UpdateStarRequestDTO);
     }
 }

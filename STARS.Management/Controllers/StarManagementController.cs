@@ -24,29 +24,27 @@ namespace STARS.Management.Controllers
         {
             _StarManagementService.SubmitStarRequest(userStarConfigurationDTO);
             return Ok();
-
         }
 
         [HttpPut("updatestarrequest/{userstarid}")]
         public ActionResult UpdateStarRequest(string userstarid, UpdateStarRequestDTO updateStarRequestDTO)
         {
-             _StarManagementService.UpdateStarRequest(userstarid,updateStarRequestDTO);
+            _StarManagementService.UpdateStarRequest(userstarid, updateStarRequestDTO);
             return Ok();
         }
 
         [HttpGet("getstarreaquest")]
         public ActionResult GetStarReaquest()
         {
-
-           var stars= _StarManagementService.GetAllStarRequest();
+            var stars = _StarManagementService.GetAllStarRequest();
             return Ok(stars);
-
         }
 
         [HttpGet("getallactivestars")]
         public ActionResult GetAllActiveStars()
         {
-            return Ok();
+            var stars = _StarManagementService.GetAllActiveStar();
+            return Ok(stars);
         }
 
         [HttpGet("getrecentstars")]
@@ -58,7 +56,7 @@ namespace STARS.Management.Controllers
         [HttpGet("getStarreaquestcount")]
         public ActionResult GetStarReaquestCount()
         {
-             var stars= _StarManagementService.GetStarRequestCount();
+            var stars = _StarManagementService.GetStarRequestCount();
             return Ok(stars);
         }
     }

@@ -10,6 +10,7 @@ public interface IStarManagementRepository
     public  Task<IEnumerable<UserStarConfigurationDTO>> GetAllStarRequest();
     public  Task UpdateStarRequest(string userstarid, UpdateStarRequestDTO UpdateStarRequestDTO);
     public  Task<StarRequestCountDTO> GetStarRequestCount();
+    public  Task<IEnumerable<StarsDTO>> GetAllActiveStar();
 
 }
 

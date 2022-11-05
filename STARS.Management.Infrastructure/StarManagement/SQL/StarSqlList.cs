@@ -7,5 +7,5 @@ public static class StarSqlList
     internal static string Get_all_user_star_config_request { get => $"{_Namespace}.get_all_user_star_config_request.sql"; }
     internal static string Updatel_star_request { get => $"{_Namespace}.updatel_star_request.sql"; }
     internal static string Get_star_request_count { get => $"{_Namespace}.get_star_request_count.sql"; }
-
+    internal static string Get_all_active_star { get => $"{_Namespace}.get_all_active_star.sql"; }
 }

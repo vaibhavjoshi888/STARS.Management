@@ -11,4 +11,5 @@ public interface IStarManagementService
     public  IEnumerable<UserStarConfigurationDTO> GetAllStarRequest();
     public  void UpdateStarRequest(string userstarid, UpdateStarRequestDTO UpdateStarRequestDTO);
     public  StarRequestCountDTO GetStarRequestCount();
+    public IEnumerable<StarsDTO> GetAllActiveStar();
 }
