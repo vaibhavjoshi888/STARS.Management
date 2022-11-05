@@ -23,9 +23,8 @@
   <EmbeddedResource Include="StarManagement\SQL\get_all_user_star_config_request.sql" />
   <EmbeddedResource Include="StarManagement\SQL\updatel_star_request.sql" />
  <EmbeddedResource Include="StarManagement\SQL\get_star_request_count.sql" />
+ <EmbeddedResource Include="StarManagement\SQL\get_all_active_star.sql" />
 
- 
-     
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
