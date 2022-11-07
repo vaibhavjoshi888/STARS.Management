@@ -80,8 +80,8 @@ public class StarManagementRepository : IStarManagementRepository
             parameters.Add("approvedby", UpdateStarRequestDTO.Approvedby, DbType.String);
             parameters.Add("feedback", UpdateStarRequestDTO.Feedback, DbType.String);
             parameters.Add("modifiedby", UpdateStarRequestDTO.ModifiedBy, DbType.String);
-            parameters.Add("userstarid", userstarid, DbType.String);
-            parameters.Add("userstarid", UpdateStarRequestDTO.CorpUserId, DbType.String);
+            parameters.Add("userstarid", userstarid, DbType.Int32);
+            parameters.Add("corpuserid", UpdateStarRequestDTO.CorpUserId, DbType.String);
 
             using (var connection = _context.CreateConnection())
             {

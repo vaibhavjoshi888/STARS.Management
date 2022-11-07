@@ -2,6 +2,7 @@ namespace STARS.Management.Core.DTO;
 
 public class UserStarConfigurationDTO
 {
+        public int UserStarId { get; set; }
         public string CorpUserId { get; set; }
         public string EmployeeName { get; set; }
         public string Message { get; set; }

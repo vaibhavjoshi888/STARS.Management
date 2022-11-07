@@ -7,6 +7,6 @@ public class StarsDTO
     public string EmployeeName { get; set; }
     public string Message { get; set; }
     public string Thumbnail { get; set; }
-    public int CreatedBy { get; set; }
+    public string CreatedBy { get; set; }
     public string CreatedDate { get; set; }
 }
