@@ -35,7 +35,6 @@ public class StarManagementRepository : IStarManagementRepository
             parameters.Add("employeename", userStarConfigurationDTO.EmployeeName, DbType.String);
             parameters.Add("createdby", userStarConfigurationDTO.CreatedBy, DbType.String);
             parameters.Add("isactive", "1", DbType.String);
-            parameters.Add("thumbnail", userStarConfigurationDTO.ThumbnailPhoto, DbType.String);
 
             using (var connection = _context.CreateConnection())
             {
