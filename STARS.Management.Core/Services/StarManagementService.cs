@@ -25,6 +25,8 @@ public class StarManagementService : IStarManagementService
     {
         List<StarsDTO> lstStarDto = new List<StarsDTO>();
         var test = _starManagementRepository.GetAllActiveStar().Result;
+        // if (test !=null)
+        // {
         // if (test.Any())
         // {
         //     foreach (var item in test)
@@ -38,6 +40,7 @@ public class StarManagementService : IStarManagementService
         //     }
         // }
         // return lstStarDto;
+       // }
         return test;
     }
 

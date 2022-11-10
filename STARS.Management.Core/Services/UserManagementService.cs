@@ -35,7 +35,7 @@ public class UserManagementService : IUserManagementService
     {
         // var adUserInfo = _lDAPService.GetUserFromAD(loginDTO.UserName, false);
         
-        // if (adUserInfo.CorpID == null)
+        // if (adUserInfo.CorpID != null)
         // {
         //     var loginhis = _userManagementRepository.GetLogingHistory(loginDTO.UserName).Result;
         //     TimeSpan span = DateTime.Now.Subtract(loginhis.LoginTime);
