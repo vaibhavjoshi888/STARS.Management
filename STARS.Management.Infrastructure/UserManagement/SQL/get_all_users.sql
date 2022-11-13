@@ -20,5 +20,6 @@ AppUser.ManagerCorpUserId AS ManagerCorpID,
 AppUser.ThumbnailPhoto,
 UserRole.RoleId as UserRoleId,
 AppUser.Createdby,
-AppUser.createddate
+FORMAT(AppUser.createddate,'dd/MM/yyyy') as CreatedDate
+
 FROM AppUser  INNER join UserRole ON UserRole.AppUserId = AppUser.AppUserId WHERE AppUser.ActiveStatus='1'
