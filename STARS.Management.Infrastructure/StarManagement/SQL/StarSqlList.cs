@@ -11,4 +11,6 @@ public static class StarSqlList
     internal static string Updatel_star_like { get => $"{_Namespace}.updatel_star_like.sql"; }
     internal static string Updatel_star_share { get => $"{_Namespace}.updatel_star_share.sql"; }
     
+    internal static string Get_recent_star { get => $"{_Namespace}.get_recent_star.sql"; }
+    
 }

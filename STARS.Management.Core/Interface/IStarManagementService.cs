@@ -14,4 +14,5 @@ public interface IStarManagementService
     public IEnumerable<StarsDTO> GetAllActiveStar();
     public  void UpdateStarShareCount(string userstarid);
     public  void UpdateStarLikeCount(string userstarid);
+    public  IEnumerable<RecentStarsDTO> GetRecentStar();
 }

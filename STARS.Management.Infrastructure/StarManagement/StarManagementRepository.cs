@@ -172,4 +172,24 @@ public class StarManagementRepository : IStarManagementRepository
         }
     }
 
+    public async Task<IEnumerable<RecentStarsDTO>> GetRecentStar()
+    {
+         try
+        {
+            var query = _QueryProviderService.GetQuery(StarSqlList.Get_recent_star);
+            using (var connection = _context.CreateConnection())
+            {
+                var starDTO = await connection.QueryAsync<RecentStarsDTO>(query);
+                if (starDTO.Any())
+                    return starDTO;
+                else
+                    return null;
+            }
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+
 }

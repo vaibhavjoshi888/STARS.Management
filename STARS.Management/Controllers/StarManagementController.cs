@@ -50,7 +50,8 @@ namespace STARS.Management.Controllers
         [HttpGet("getrecentstars")]
         public ActionResult GetRecentStars()
         {
-            return Ok();
+            var stars = _StarManagementService.GetRecentStar();
+            return Ok(stars);
         }
 
         [HttpGet("getStarreaquestcount")]
