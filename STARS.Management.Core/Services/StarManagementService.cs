@@ -59,8 +59,18 @@ public class StarManagementService : IStarManagementService
         _starManagementRepository.SubmitStarRequest(userStarConfigurationDTO).GetAwaiter().GetResult();
     }
 
+    public void UpdateStarLikeCount(string userstarid)
+    {
+        _starManagementRepository.UpdateStarLikeCount(userstarid);
+    }
+
     public void UpdateStarRequest(string userstarid, UpdateStarRequestDTO UpdateStarRequestDTO)
     {
         _starManagementRepository.UpdateStarRequest(userstarid, UpdateStarRequestDTO);
+    }
+
+    public void UpdateStarShareCount(string userstarid)
+    {
+        _starManagementRepository.UpdateStarShareCountCount(userstarid);
     }
 }

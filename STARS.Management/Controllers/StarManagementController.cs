@@ -59,5 +59,19 @@ namespace STARS.Management.Controllers
             var stars = _StarManagementService.GetStarRequestCount();
             return Ok(stars);
         }
+
+        [HttpPut("updatestarlikecount/{userstarid}")]
+        public ActionResult UpdateStarLike(string userstarid)
+        {
+            _StarManagementService.UpdateStarLikeCount(userstarid);
+            return Ok();
+        }
+
+        [HttpPut("updatestarsharecount/{userstarid}")]
+        public ActionResult UpdateStarShare(string userstarid)
+        {
+            _StarManagementService.UpdateStarShareCount(userstarid);
+            return Ok();
+        }
     }
 }

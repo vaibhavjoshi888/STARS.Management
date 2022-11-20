@@ -131,6 +131,45 @@ public class StarManagementRepository : IStarManagementRepository
             throw ex;
         }
     }
+   
+    public async Task UpdateStarLikeCount(string userstarid)
+    {
+        try
+        {
 
+            var queryAppUser = _QueryProviderService.GetQuery(StarSqlList.Updatel_star_like);
+            var parameters = new DynamicParameters();
+            parameters.Add("userstarid", userstarid, DbType.Int32);
+
+            using (var connection = _context.CreateConnection())
+            {
+                var identity = await connection.ExecuteAsync(queryAppUser, parameters);
+            }
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+   
+    public async Task UpdateStarShareCountCount(string userstarid)
+    {
+        try
+        {
+
+            var queryAppUser = _QueryProviderService.GetQuery(StarSqlList.Updatel_star_share);
+            var parameters = new DynamicParameters();
+            parameters.Add("userstarid", userstarid, DbType.Int32);
+
+            using (var connection = _context.CreateConnection())
+            {
+                var identity = await connection.ExecuteAsync(queryAppUser, parameters);
+            }
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
 
 }

@@ -9,4 +9,6 @@ public class StarsDTO
     public string Thumbnail { get; set; }
     public string CreatedBy { get; set; }
     public string CreatedDate { get; set; }
+    public int ShareCount { get; set; }
+    public int LikeCOunt { get; set; }
 }

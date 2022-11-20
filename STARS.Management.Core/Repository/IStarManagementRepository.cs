@@ -11,6 +11,8 @@ public interface IStarManagementRepository
     public  Task UpdateStarRequest(string userstarid, UpdateStarRequestDTO UpdateStarRequestDTO);
     public  Task<StarRequestCountDTO> GetStarRequestCount();
     public  Task<IEnumerable<StarsDTO>> GetAllActiveStar();
+    public  Task UpdateStarShareCountCount(string userstarid);
+    public  Task UpdateStarLikeCount(string userstarid);
 
 }
 

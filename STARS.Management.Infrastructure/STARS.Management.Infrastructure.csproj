@@ -25,6 +25,9 @@
   <EmbeddedResource Include="StarManagement\SQL\updatel_star_request.sql" />
  <EmbeddedResource Include="StarManagement\SQL\get_star_request_count.sql" />
  <EmbeddedResource Include="StarManagement\SQL\get_all_active_star.sql" />
+ <EmbeddedResource Include="StarManagement\SQL\updatel_star_like.sql" />
+
+ <EmbeddedResource Include="StarManagement\SQL\updatel_star_share.sql" />
 
   </ItemGroup>
   <PropertyGroup>
