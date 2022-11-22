@@ -33,6 +33,8 @@ public class StarManagementRepository : IStarManagementRepository
             parameters.Add("message", userStarConfigurationDTO.Message, DbType.String);
             parameters.Add("status", "P", DbType.String);
             parameters.Add("employeename", userStarConfigurationDTO.EmployeeName, DbType.String);
+            parameters.Add("starfirstname", userStarConfigurationDTO.StarFirstName, DbType.String);
+            parameters.Add("starlastname", userStarConfigurationDTO.StarLastName, DbType.String);
             parameters.Add("createdby", userStarConfigurationDTO.CreatedBy, DbType.String);
             parameters.Add("isactive", "1", DbType.String);
 

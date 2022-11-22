@@ -5,6 +5,10 @@ public class UserStarConfigurationDTO
         public int UserStarId { get; set; }
         public string CorpUserId { get; set; }
         public string EmployeeName { get; set; }
+        
+        public string StarFirstName { get; set; }
+        
+        public string StarLastName { get; set; }
         public string Message { get; set; }
         public string Status { get; set; }
         public int Isactive { get; set; }
