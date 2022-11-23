@@ -1,0 +1,706 @@
+
+.col-image {
+    width:100px;
+}
+
+.col-action {
+    width: 100px;
+}
+.col-action .btn {
+    min-width: 84px;
+    text-align:left;
+}
+
+.col-name {
+    width:200px;
+}
+.col-corpid {
+    width: 155px;
+}
+.col-email {
+    width: 50px;
+}
+.col-role {
+    width: 250px;
+}
+ 
+
+html,
+body {
+    padding: 0px;
+    margin: 0px;
+    color: #343a40;
+    font-family: "SEGOEUI","Segoe UI Regular", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+   font-size: 14px;
+  /*  line-height:1.4;*/
+}
+
+header {
+    background: linear-gradient(to right, #4e99ff, #363177);
+    background-image: url("../../assets/images/T2EVHeader.png");
+    background-repeat: no-repeat;
+    /*background-size: 100% 124pt;*/
+    background-size: cover;
+    background-position: center right;
+    padding: 30px 0;
+    color: #fff;
+    max-width: 1170px; /*1200*/
+    margin: 0 auto;
+}
+ 
+
+*:focus {
+    outline: none;
+}
+
+*, input, select, textarea, option, button {
+    outline: none !important;
+}
+ 
+ 
+.body-content {  
+    padding: 30px 0;
+    min-height: calc(100vh - 174px);
+}
+
+
+.title-l-4p5 {
+    font-family: "SEGOEUIL", "Segoe UI Light", "Segoe UI";
+    font-size: 4.5rem; 
+    margin-top: -10px;
+    line-height: 1;
+}
+
+.title-l-1p5 {
+    font-family: "SEGOEUIL", "Segoe UI Light", "Segoe UI";
+    font-size: 1.5rem;
+    line-height: 1;
+    margin-top: -2px
+}
+
+.title-b-1p2 {
+    font-family: "SEGOEUIB","Segoe UI Bold", "Segoe UI";
+    font-size: 1.2rem;
+    line-height: 1;
+    margin-top: -2px
+}
+
+.title-l-72 {
+    font-family: "SEGOEUIL", "Segoe UI Light", "Segoe UI";
+    font-size: 72px;
+    line-height: .75;
+}
+
+.title-l-60 {
+    font-family: "SEGOEUIL", "Segoe UI Light", "Segoe UI";
+    font-size: 60px;
+    line-height: .85;
+}
+
+.title-l-48 {
+    font-family: "SEGOEUIL", "Segoe UI Light", "Segoe UI";
+    font-size: 48px;
+    line-height: .85;
+}
+
+
+.title-l-46 {
+    font-family: "SEGOEUIL", "Segoe UI Light", "Segoe UI";
+    font-size: 46px;
+    line-height: .85;
+}
+
+.title-l-40 {
+    font-family: "SEGOEUIL", "Segoe UI Light", "Segoe UI";
+    font-size: 40px;
+    color: #1d4189;
+    line-height: .85;
+}
+
+.title-l-56 {
+    font-family: "SEGOEUIL", "Segoe UI Light", "Segoe UI";
+    font-size: 56px;
+    color: #1d4189;
+}
+
+.title-l-36 {
+    font-family: "SEGOEUIL", "Segoe UI Light", "Segoe UI";
+    font-size: 36px;
+    line-height: 1.25;
+}
+
+.title-l-34 {
+    font-family: "SEGOEUIL", "Segoe UI Light", "Segoe UI";
+    font-size: 34px;
+    line-height: 1.25;
+}
+
+.title-l-30 {
+    font-family: "SEGOEUIL", "Segoe UI Light", "Segoe UI";
+    font-size: 30px;
+    color: #1d4189;
+    margin-bottom: 10px;
+}
+
+.title-l-26 {
+    font-family: "SEGOEUIL", "Segoe UI Light", "Segoe UI";
+    font-size: 26px; 
+}
+ 
+
+.title-b-26 {
+    font-family: "SEGOEUIB","Segoe UI Bold", "Segoe UI";
+    font-size: 26px;
+    color: #1d4189; 
+}
+
+.title-b-28 {
+    font-family: "SEGOEUIB","Segoe UI Bold", "Segoe UI";
+    font-size: 28px;
+    color: #1d4189;
+}
+
+
+.title-l-24 {
+    font-family: "SEGOEUIL", "Segoe UI Light", "Segoe UI";
+    font-size: 24px;
+    line-height: 1.3;
+}
+
+.title-l-22 {
+    font-family: "SEGOEUIL", "Segoe UI Light", "Segoe UI";
+    font-size: 22px; 
+}
+
+.title-l-20 {
+    font-family: "SEGOEUIL", "Segoe UI Light", "Segoe UI";
+    font-size: 20px;
+}
+
+
+.title-b-18 {
+    font-family: "SEGOEUIB","Segoe UI Bold", "Segoe UI";
+    font-size: 22px;
+    color: #1d4189;
+    line-height: 1;  
+}
+
+
+.title-l-18 {
+    font-family: "SEGOEUIL", "Segoe UI Light", "Segoe UI";
+    font-size: 18px;
+    line-height: 1.4;
+}
+
+
+.title-18 {
+    font-family: "SEGOEUIB","Segoe UI Bold", "Segoe UI";
+    font-size: 18px; 
+    line-height: 1; 
+}
+
+.title-l-16 {     
+    font-family: "SEGOEUIL", "Segoe UI Light", "Segoe UI";
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.title-b-16 {
+    font-family: "SEGOEUIB","Segoe UI Bold", "Segoe UI";
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.title-b-14 {
+    font-family: "SEGOEUIB","Segoe UI Bold", "Segoe UI";
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.title-12 {
+    font-family: "SEGOEUI","Segoe UI Regular", "Segoe UI";
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+
+.cust-val {
+    font-family: "SEGOEUIB","Segoe UI Bold", "Segoe UI";
+    font-weight: 700;
+}
+
+
+
+.top-nav {
+    padding: .75rem .5rem .0rem !important;
+}
+
+.top-nav .nav-link {
+    color: #fff !important;
+    /*font-size: 14pt;
+    font-family: 'Segoe UI Regular';*/
+    text-transform: uppercase;
+    padding: 0.25rem 0 !important; 
+    margin-left: 0.75rem !important;
+    margin-right: 0.75rem !important;
+}
+
+
+.top-nav .nav-link:hover {
+    border-bottom: 2px solid #fff !important;
+}
+
+.navbar-dark .navbar-nav .show > .nav-link,
+.navbar-dark .navbar-nav .active > .nav-link,
+.navbar-dark .navbar-nav .nav-link.show,
+.navbar-dark .navbar-nav .nav-link.active {
+    border-bottom: 2px solid #fff !important;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #fff !important;
+}
+
+
+
+.pill,
+.btn-pill {
+    border-radius: 50rem;
+}
+
+.search-ctrl .form-control {
+    padding-right: 34px !important;
+}
+
+.search-ctrl .input-group-append .input-group-text {
+    margin: 4px 0;
+    margin-left: -30px !important;
+    padding: 0.375rem 0.475rem;
+    background-color: #1d4188;
+    color: #fff;
+    cursor:pointer;
+    z-index:10;
+}
+
+.border-left-lightblue{
+    border-left:6px solid #4497CB;
+}
+
+
+.btn-gray-blue {
+    color: #1d4189;
+    background-color: #f2f2f2;
+    border-color: #ddd;
+    font-size: 1rem;
+    font-family: "SEGOEUIB","Segoe UI Bold", "Segoe UI";
+}
+
+    .btn-gray-blue:hover {
+        color: #fff;
+        background-color: #0f316f;
+        border-color: #0f316f;
+    }
+
+    .btn-gray-blue:focus, .btn-gray-blue.focus {
+        box-shadow: 0 0 0 0.2rem rgba(15,49, 111, 0.25);
+    }
+
+    .btn-gray-blue.disabled, .btn-gray-blue:disabled {
+        color: #1d4189;
+        background-color: rgba(15, 49, 111, 0.25);
+        border-color: rgba(15, 49, 111, 0.50);
+    }
+
+    .btn-gray-blue:not(:disabled):not(.disabled):active, .btn-gray-blue:not(:disabled):not(.disabled).active,
+    .show > .btn-gray-blue.dropdown-toggle {
+        color: #fff;
+        background-color: #1a50b1;
+        border-color: #1a50b1;
+    }
+
+        .btn-gray-blue:not(:disabled):not(.disabled):active:focus, .btn-gray-blue:not(:disabled):not(.disabled).active:focus,
+        .show > .btn-gray-blue.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.2rem rgba(15, 49, 111, 0.25);
+        }
+
+
+
+.btn-blue {
+    color: #fff;
+    background-color: #1d4189;
+    border-color: #1d4189;
+}
+
+    .btn-blue:hover {
+        color: #fff;
+        background-color: #0f316f;
+        border-color: #0f316f;
+    }
+
+    .btn-blue:focus, .btn-blue.focus {
+        box-shadow: 0 0 0 0.2rem rgba(29,65,137, 0.25);
+    }
+
+    .btn-blue.disabled, .btn-blue:disabled {
+        color: #fff;
+        background-color: #1d4189;
+        border-color: #1d4189;
+    }
+
+    .btn-blue:not(:disabled):not(.disabled):active, .btn-blue:not(:disabled):not(.disabled).active,
+    .show > .btn-blue.dropdown-toggle {
+        color: #fff;
+        background-color: #1a50b1;
+        border-color: #1a50b1;
+    }
+
+        .btn-blue:not(:disabled):not(.disabled):active:focus, .btn-blue:not(:disabled):not(.disabled).active:focus,
+        .show > .btn-blue.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.2rem rgba(29,65,137, 0.25);
+        }
+
+
+.btn-outline-blue {
+    color: #1d4189;
+    border-color: #1d4189;
+}
+
+    .btn-outline-blue:hover {
+        color: #fff;
+        background-color: #1d4189;
+        border-color: #1d4189;
+    }
+
+    .btn-outline-blue:focus, .btn-outline-blue.focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
+
+    .btn-outline-blue.disabled, .btn-outline-blue:disabled {
+        color: #1d4189;
+        background-color: transparent;
+    }
+
+    .btn-outline-blue:not(:disabled):not(.disabled):active, .btn-outline-blue:not(:disabled):not(.disabled).active,
+    .show > .btn-outline-blue.dropdown-toggle {
+        color: #fff;
+        background-color: #1d4189;
+        border-color: #1d4189;
+    }
+
+        .btn-outline-blue:not(:disabled):not(.disabled):active:focus, .btn-outline-blue:not(:disabled):not(.disabled).active:focus,
+        .show > .btn-outline-blue.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+        }
+
+
+.btn-pink {
+    color: #fff;
+    background-color: #e81f76;
+    border-color: #e81f76;
+}
+
+    .btn-pink:hover {
+        color: #fff;
+        background-color: #d01c6a;
+        border-color: #d01c6a;
+    }
+
+    .btn-pink:focus, .btn-pink.focus {
+        box-shadow: 0 0 0 0.2rem rgba(232,31,118, 0.25);
+    }
+
+    .btn-pink.disabled, .btn-pink:disabled {
+        color: #fff;
+        background-color: #e81f76;
+        border-color: #e81f76;
+    }
+
+    .btn-pink:not(:disabled):not(.disabled):active, .btn-pink:not(:disabled):not(.disabled).active,
+    .show > .btn-pink.dropdown-toggle {
+        color: #fff;
+        background-color: #f52881;
+        border-color: #f52881;
+    }
+
+        .btn-pink:not(:disabled):not(.disabled):active:focus, .btn-pink:not(:disabled):not(.disabled).active:focus,
+        .show > .btn-pink.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.2rem rgba(232,31,118, 0.25);
+        }
+
+
+.text-bold {
+    font-size: 14px;
+    font-family: SegoeUI-Semibold, Segoe UI;
+    font-weight: 600;
+}
+
+.text-blue {
+    color: #1a428a;
+} 
+
+.bg-blue {
+    background: #1a428a; 
+}
+
+.bg-light-blue {
+    background: #4197CB;
+}
+
+
+.text-pink {
+    color: #e81f76;
+}
+
+.bg-pink {
+    background: #e81f76;
+} 
+
+.cust-bg-light {
+    background: #f1f1f1;
+}
+
+
+
+.cust-list-item { 
+    margin-bottom:12px;
+    padding:.200rem;
+}
+
+.cust-list-item-body {
+    border-left: 4px solid #4197cb; 
+}
+    .cust-list-item-body .table,
+    .cust-list-item-body tr,
+    .cust-list-item-body th,
+    .cust-list-item-body td {
+        border: 0px;
+    }
+    .cust-list-item-body tbody tr:first-child td {
+        padding:0px 2px 0px 2px;
+    }
+    .cust-list-item-body tbody tr:last-child td {
+        padding: 8px 2px 0px 2px;
+    }
+
+
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+.cust-lbl {
+    padding:0px 2px 0px 2px;
+} 
+
+.cust-val {
+    /*font-family: "SEGOEUIB","Segoe UI Bold", "Segoe UI";*/
+    font-family: SegoeUI-Bold, Segoe UI;
+    font-weight: 700;
+    padding:0px 2px 0px 2px;
+}
+
+.facility-val {   
+    font-family: Segoe UI;
+    font-size: 18px;
+}
+
+.cust-bold {
+    font-family: SegoeUI-Bold, Segoe UI;
+}
+ 
+
+/******************************************/
+
+.signin {
+    /*width: 950px;*/   
+    margin: 50px auto;
+}
+
+    .signin .signin-card {
+        width: 550px !important;
+        height: 524px !important;
+        margin: auto -2px auto 0;
+    }
+
+
+        .signin .signin-card .card-body {
+            padding: 6rem 4.25rem;
+        }
+
+    .signin .signin-welcome {
+        width: 400px !important;
+        min-height: 600px !important;
+        border: 0px;
+        border-radius: unset;
+        /*background: #1c3d78;*/
+        background-image: url("../../assets/images/T2EVSignInPic.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+    }
+
+.btn-svg rect:hover,
+.btn-svg text:hover {
+    fill: #0062cc !important;
+}
+ 
+
+/******************************************/
+
+.signin-info .user-name {
+    font-size: 14px;
+    font-family: SegoeUI-Semibold, Segoe UI;
+    font-weight: 600;
+    text-transform:uppercase;
+}
+
+.signin-info .signout .fa-sign-out {
+    font-size: 1.5rem; 
+
+}
+
+/******************************************/
+
+.btn-timeslot {
+    width: 72.4px;
+}
+
+.cust-olist-item {
+    text-indent:-15px;
+    margin-left:15px;
+
+}
+
+.thumbnil-photo,
+.name-initial{
+    height:100px;
+    width:100px;
+}
+
+.name-initial {font-size:46px;}
+
+    .thumbnil-photo img {
+        width: 100px;
+        height: 100px;
+    }
+
+
+.btn-inner-icon {
+    /*width: 18px;*/
+    height: 18px;
+    vertical-align: top;
+    margin-top: 1px;
+}
+
+.icon-1p3 {
+    /*width: 1.3rem;*/
+    height: 1.3rem;
+    vertical-align: baseline;
+}
+
+.list-svg-icon {
+    /*width: 18px;*/
+    height: 18px;
+    vertical-align: top;
+    margin-top: 1px;
+}
+
+.cust-pl-2p4 {
+    padding-left:2.4rem;
+}
+
+
+.date-box {
+    width:100px;
+}
+
+
+/*Table Sorting Style*/
+.sortable .fa-sort {
+    float: right;
+    margin-top: 4px;
+    color: #999;
+}
+
+
+.sortable .fa-sort-asc {
+    float: right;
+    margin-top: 8px;
+}
+
+.sortable .fa-sort-desc {
+    float: right;
+    margin-top: 4px;
+}
+
+.sortable-left .fa-sort {
+    margin-top: 4px;
+    color: #999;
+}
+
+.sortable-left .fa-sort-asc {
+    margin-top: 8px;
+}
+
+.sortable-left .fa-sort-desc {
+    margin-top: 4px;
+}
+
+[ng-click],
+[sort-click] {
+    cursor: pointer;
+}
+
+.cust-table-border-0
+{
+    border:0 ;
+}
+    .cust-table-border-0 th,
+    .cust-table-border-0 td {
+        border-top: 0 ;
+    }
+
+.child-table.cust-table-border-0 thead th
+{
+    border: 0 ;
+}
+
+.bg-sticker {
+    background-image: url("../../assets/images/StickerBackground2.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center right;
+    /*padding: 30px 0;*/
+    width: 142px;
+    height: 117px;
+    margin: 0 auto;
+    color:#000;
+}
+
+.sticker-type {
+    font-family: 'Arial Black';
+    font-size: 32px;
+}
+
+.sticker-number {
+    font-family: 'Arial Black';
+    font-size: 26px;
+    min-height:36px;
+}
+
+.sticker-season {
+    font-family: 'Arial Black';
+    font-size: 20px;
+}
+
+.highcharts-credits {
+    fill: #fff !important;
+    color: #fff;
+}
+
