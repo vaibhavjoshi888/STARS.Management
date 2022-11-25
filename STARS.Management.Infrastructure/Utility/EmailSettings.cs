@@ -1,5 +1,7 @@
+using System;
 using System.DirectoryServices.AccountManagement;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -15,10 +17,24 @@ public class EmailSettings : IEmailSettings
         //     Host="",
         //     Port=00
         // };
+       
     }
 
     public async Task SendEmail(MailMessage mailMessage)
     {
-       await  _smtoclient.SendMailAsync(mailMessage);
+        try
+        {
+            var client = new SmtpClient("smtp.mailtrap.io", 2525)
+            {
+                Credentials = new NetworkCredential("248cb4cbeccccb", "ee3a33d09022eb"),
+                EnableSsl = true
+            };
+          await  client.SendMailAsync(mailMessage);
+        }
+        catch(Exception ex)
+        {
+            throw ex;
+        }
+
     }
 }

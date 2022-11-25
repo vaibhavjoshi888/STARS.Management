@@ -23,7 +23,7 @@ public class EmailService : IEmailService
         mm.Subject = subject;
         mm.IsBodyHtml = true;
         mm.To.Add(to);
-        mm.From = new MailAddress("");
+        mm.From = new MailAddress("no-reply@myapp.com");
         await _emailSettings.SendEmail(mm);
     }
 

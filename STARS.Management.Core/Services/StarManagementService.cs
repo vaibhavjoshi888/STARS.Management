@@ -105,17 +105,29 @@ public class StarManagementService : IStarManagementService
 
     private void SendEmail(UserStarConfigurationDTO userStarConfigurationDTO, string EmailType)
     {
-        var adUser = _lDAPService.GetUserFromAD(userStarConfigurationDTO.CorpUserId, false);
+        // var adUser = _lDAPService.GetUserFromAD(userStarConfigurationDTO.CorpUserId, false);
+        // EmailDTO emailDTO = new EmailDTO();
+        // emailDTO.CorpID = userStarConfigurationDTO.CorpUserId;
+        // emailDTO.CreatedBy = userStarConfigurationDTO.CreatedBy;
+        // //emailDTO.CreatedDate=userStarConfigurationDTO.CreatedDate;
+        // emailDTO.Email = adUser.Email;
+        // emailDTO.FullName = adUser.FullName;
+        // emailDTO.Manager = adUser.Manager;
+        // emailDTO.ManagerEmail = adUser.ManagerEmail;
+        // emailDTO.Phone = adUser.Phone;
+       // emailDTO.PlaceholderMessage = userStarConfigurationDTO.Message;
+        
         EmailDTO emailDTO = new EmailDTO();
         emailDTO.CorpID = userStarConfigurationDTO.CorpUserId;
         emailDTO.CreatedBy = userStarConfigurationDTO.CreatedBy;
         //emailDTO.CreatedDate=userStarConfigurationDTO.CreatedDate;
-        emailDTO.Email = adUser.Email;
-        emailDTO.FullName = adUser.FullName;
-        emailDTO.Manager = adUser.Manager;
-        emailDTO.ManagerEmail = adUser.ManagerEmail;
-        emailDTO.Phone = adUser.Phone;
-        emailDTO.PlaceholderMessage = userStarConfigurationDTO.Message;
+
+        emailDTO.Email = "shirkant@reddy.com";
+        emailDTO.FullName = "Asihs yenurkar";
+        emailDTO.Manager = "Shrikant Reddy";
+        emailDTO.ManagerEmail ="shrikant@reddy.com";
+        emailDTO.Phone = "1234567";
+        emailDTO.PlaceholderMessage ="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam rhoncus diam eros, vitae facilisis ligula finibus sed.       Aliquam hendrerit erat eu dignissim volutpat. In et risus laoreet, finibus ligula nec, bibendum purus. Nullam       sollicitudin feugiat mauris, ac tempor elit fringilla vitae";
 
         if (EmailType == "NotificationtoAdmin")
         {
@@ -123,7 +135,7 @@ public class StarManagementService : IStarManagementService
             emailDTO.PlaceholderCongrats = "A new STAR has been submitted for your review";
             emailDTO.PlaceholderView = "To review this STAR";
         }
-
-        _emailService.SendEmail(adUser.Email, "", emailDTO);
+        _emailService.SendEmail("vaibhavjoshi888@gmail.com", "Star App", emailDTO);
+        //_emailService.SendEmail(adUser.Email, "", emailDTO);
     }
 }
