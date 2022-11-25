@@ -16,12 +16,14 @@ public class StarManagementService : IStarManagementService
     private readonly IStarManagementRepository _starManagementRepository;
     private readonly ILDAPService _lDAPService;
     private readonly IEmailService _emailService;
+    private readonly IUserManagementRepository _userManagementRepository;
     public StarManagementService(IStarManagementRepository starManagementRepository, ILDAPService lDAPService,
-    IEmailService emailService)
+    IEmailService emailService,IUserManagementRepository userManagementRepository)
     {
         _starManagementRepository = starManagementRepository;
         _lDAPService = lDAPService;
         _emailService = emailService;
+        _userManagementRepository=userManagementRepository;
     }
 
     public IEnumerable<StarsDTO> GetAllActiveStar()
@@ -85,7 +87,7 @@ public class StarManagementService : IStarManagementService
     public void SubmitStarRequest(UserStarConfigurationDTO userStarConfigurationDTO)
     {
         _starManagementRepository.SubmitStarRequest(userStarConfigurationDTO).GetAwaiter().GetResult();
-        SendEmail(userStarConfigurationDTO,"NotificationtoAdmin");
+        SendEmail(userStarConfigurationDTO);
     }
 
     public void UpdateStarLikeCount(string userstarid)
@@ -96,6 +98,7 @@ public class StarManagementService : IStarManagementService
     public void UpdateStarRequest(string userstarid, UpdateStarRequestDTO UpdateStarRequestDTO)
     {
         _starManagementRepository.UpdateStarRequest(userstarid, UpdateStarRequestDTO);
+        SendEmail(UpdateStarRequestDTO, userstarid);
     }
 
     public void UpdateStarShareCount(string userstarid)
@@ -103,39 +106,112 @@ public class StarManagementService : IStarManagementService
         _starManagementRepository.UpdateStarShareCountCount(userstarid);
     }
 
-    private void SendEmail(UserStarConfigurationDTO userStarConfigurationDTO, string EmailType)
+    private void SendEmail(UpdateStarRequestDTO userStarConfigurationDTO, string userstarid)
     {
-        // var adUser = _lDAPService.GetUserFromAD(userStarConfigurationDTO.CorpUserId, false);
-        // EmailDTO emailDTO = new EmailDTO();
-        // emailDTO.CorpID = userStarConfigurationDTO.CorpUserId;
-        // emailDTO.CreatedBy = userStarConfigurationDTO.CreatedBy;
-        // //emailDTO.CreatedDate=userStarConfigurationDTO.CreatedDate;
-        // emailDTO.Email = adUser.Email;
-        // emailDTO.FullName = adUser.FullName;
-        // emailDTO.Manager = adUser.Manager;
-        // emailDTO.ManagerEmail = adUser.ManagerEmail;
-        // emailDTO.Phone = adUser.Phone;
-       // emailDTO.PlaceholderMessage = userStarConfigurationDTO.Message;
-        
+
+        var userStarConfig = GetAllStarRequest().Where(x => x.UserStarId == Convert.ToInt32(userstarid)).FirstOrDefault();
+        var adSubmitUser = _lDAPService.GetUserFromAD(userStarConfig.CreatedBy, false);
+
+        if (userStarConfigurationDTO.Status == "A")
+        {
+            var adUser = _lDAPService.GetUserFromAD(userStarConfig.CreatedBy, false);
+            EmailDTO emailDTO = new EmailDTO();
+            emailDTO.CorpID = userStarConfigurationDTO.CorpUserId;
+            emailDTO.CreatedBy = userStarConfig.CreatedBy;
+            emailDTO.CreatedDate = DateTime.Parse(userStarConfig.CreatedDate);
+            emailDTO.Email = adUser.Email;
+            emailDTO.FullName = adUser.FullName;
+            emailDTO.Manager = adUser.Manager;
+            emailDTO.ManagerEmail = adUser.ManagerEmail;
+            emailDTO.Phone = adUser.Phone;
+            emailDTO.PlaceholderMessage = userStarConfigurationDTO.Message;
+            emailDTO.CorpID = userStarConfigurationDTO.CorpUserId;
+            
+            emailDTO.PlaceholderButtonText = "Click Here to view STAR >";
+            emailDTO.PlaceholderCongrats = "Congratulations, a new STAR has been submitted for you!";
+            emailDTO.PlaceholderView = "To view this STAR,";
+
+            EmailDTO emailSubmitDTO = new EmailDTO();
+            emailSubmitDTO.CorpID = userStarConfigurationDTO.CorpUserId;
+            emailSubmitDTO.CreatedBy = userStarConfig.CreatedBy;
+            emailSubmitDTO.CreatedDate = DateTime.Parse(userStarConfig.CreatedDate);
+            emailSubmitDTO.Email = adUser.Email;
+            emailSubmitDTO.FullName = adUser.FullName;
+            emailSubmitDTO.Manager = adUser.Manager;
+            emailSubmitDTO.ManagerEmail = adUser.ManagerEmail;
+            emailSubmitDTO.Phone = adUser.Phone;
+            emailSubmitDTO.PlaceholderMessage = userStarConfigurationDTO.Message;
+            emailSubmitDTO.CorpID = userStarConfigurationDTO.CorpUserId;
+            
+            emailSubmitDTO.PlaceholderButtonText = "Click Here to Review STAR >";
+            emailSubmitDTO.PlaceholderCongrats = "The STAR you submitted was approved!";
+            emailSubmitDTO.PlaceholderView = "To review this STAR";
+
+            _emailService.SendEmail(adUser.Email, "Star App", emailDTO);
+
+            _emailService.SendEmail(adSubmitUser.Email, "Star App", emailSubmitDTO);
+
+        }
+        else if (userStarConfigurationDTO.Status == "D")
+        {
+            var adUser = _lDAPService.GetUserFromAD(userStarConfig.CreatedBy, false);
+            EmailDTO emailDTO = new EmailDTO();
+            emailDTO.CorpID = userStarConfigurationDTO.CorpUserId;
+            emailDTO.CreatedBy = userStarConfig.CreatedBy;
+            emailDTO.CreatedDate = DateTime.Parse(userStarConfig.CreatedDate);
+            emailDTO.Email = adUser.Email;
+            emailDTO.FullName = adUser.FullName;
+            emailDTO.Manager = adUser.Manager;
+            emailDTO.ManagerEmail = adUser.ManagerEmail;
+            emailDTO.Phone = adUser.Phone;
+            emailDTO.Status = "D";
+            emailDTO.PlaceholderDenial = userStarConfigurationDTO.Feedback;
+            emailDTO.PlaceholderMessage = userStarConfigurationDTO.Message;
+
+            emailDTO.PlaceholderButtonText = "Click Here to Review STAR >";
+            emailDTO.PlaceholderCongrats = "The STAR you submitted was denied.";
+            emailDTO.PlaceholderView = "To resubmit,";
+
+            _emailService.SendEmail(adSubmitUser.Email, "Star App", emailDTO);
+        }
+
+    }
+
+    private void SendEmail(UserStarConfigurationDTO userStarConfigurationDTO)
+    {
+        var adUser = _lDAPService.GetUserFromAD(userStarConfigurationDTO.CorpUserId, false);
         EmailDTO emailDTO = new EmailDTO();
         emailDTO.CorpID = userStarConfigurationDTO.CorpUserId;
         emailDTO.CreatedBy = userStarConfigurationDTO.CreatedBy;
-        //emailDTO.CreatedDate=userStarConfigurationDTO.CreatedDate;
+        emailDTO.CreatedDate = DateTime.Parse(userStarConfigurationDTO.CreatedDate);
+        emailDTO.Email = adUser.Email;
+        emailDTO.FullName = adUser.FullName;
+        emailDTO.Manager = adUser.Manager;
+        emailDTO.ManagerEmail = adUser.ManagerEmail;
+        emailDTO.Phone = adUser.Phone;
+        emailDTO.PlaceholderMessage = userStarConfigurationDTO.Message;
 
-        emailDTO.Email = "shirkant@reddy.com";
-        emailDTO.FullName = "Asihs yenurkar";
-        emailDTO.Manager = "Shrikant Reddy";
-        emailDTO.ManagerEmail ="shrikant@reddy.com";
-        emailDTO.Phone = "1234567";
-        emailDTO.PlaceholderMessage ="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam rhoncus diam eros, vitae facilisis ligula finibus sed.       Aliquam hendrerit erat eu dignissim volutpat. In et risus laoreet, finibus ligula nec, bibendum purus. Nullam       sollicitudin feugiat mauris, ac tempor elit fringilla vitae";
+        emailDTO.PlaceholderButtonText = "Click Here to Review STAR >";
+        emailDTO.PlaceholderCongrats = "A new STAR has been submitted for your review";
+        emailDTO.PlaceholderView = "To review this STAR";
 
-        if (EmailType == "NotificationtoAdmin")
-        {
-            emailDTO.PlaceholderButtonText = "Click Here to Review STAR >";
-            emailDTO.PlaceholderCongrats = "A new STAR has been submitted for your review";
-            emailDTO.PlaceholderView = "To review this STAR";
-        }
-        _emailService.SendEmail("vaibhavjoshi888@gmail.com", "Star App", emailDTO);
-        //_emailService.SendEmail(adUser.Email, "", emailDTO);
+        EmailDTO emailManagerDTO = new EmailDTO();
+        emailManagerDTO.CorpID = userStarConfigurationDTO.CorpUserId;
+        emailManagerDTO.CreatedBy = userStarConfigurationDTO.CreatedBy;
+        emailManagerDTO.CreatedDate = DateTime.Parse(userStarConfigurationDTO.CreatedDate);
+        emailManagerDTO.Email = adUser.Email;
+        emailManagerDTO.FullName = adUser.FullName;
+        emailManagerDTO.Manager = adUser.Manager;
+        emailManagerDTO.ManagerEmail = adUser.ManagerEmail;
+        emailManagerDTO.Phone = adUser.Phone;
+        emailManagerDTO.PlaceholderMessage = userStarConfigurationDTO.Message;
+
+        emailManagerDTO.PlaceholderButtonText = "Click Here to view STAR >";
+        emailManagerDTO.PlaceholderCongrats = "Congratulations, a new STAR has been submitted for one of your employee";
+        emailManagerDTO.PlaceholderView = "To view this STAR";
+
+        _emailService.SendEmail("", "STAR App", emailDTO,_userManagementRepository.GetAdminEmail().Result.ToList());
+
+        _emailService.SendEmail(adUser.ManagerEmail, "STAR App", emailManagerDTO);
     }
 }

@@ -9,6 +9,7 @@ public interface IEmailService
 {
     
    Task SendEmail(string to, string subject, EmailDTO body);
+  Task SendEmail(string to, string subject, EmailDTO body,List<string> lstAdminEmails=null);
     
 }
 

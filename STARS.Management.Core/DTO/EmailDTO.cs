@@ -15,6 +15,8 @@ public class EmailDTO
     public string PlaceholderCongrats { get; set; }
     public string PlaceholderView { get; set; }
     public string PlaceholderMessage { get; set; }
+    public string PlaceholderDenial { get; set; }
     public string PlaceholderButtonText { get; set; }
+    public string Status { get; set; }
 
 }

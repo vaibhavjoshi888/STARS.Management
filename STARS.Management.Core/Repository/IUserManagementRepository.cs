@@ -16,6 +16,7 @@ public interface IUserManagementRepository
     public  Task<LogInHistoryDTO> GetLogingHistory(string CorpUserId);
     public  Task UpdateLoginHistory(string corpuserid);
     public Task DeleteLoginHistory(string userid);
+    public Task<IEnumerable<string>> GetAdminEmail();
 
 }
 

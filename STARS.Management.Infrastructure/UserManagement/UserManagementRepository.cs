@@ -69,6 +69,25 @@ public class UserManagementRepository : IUserManagementRepository
         }
     }
 
+    public async Task<IEnumerable<string>> GetAdminEmail()
+    {
+        try
+        {
+            using (var connection = _context.CreateConnection())
+            {
+                var lstAdminEmails = await connection.QueryAsync<string>("SELECT Email FROM AppUser WHERE ActiveStatus=1");
+                if (lstAdminEmails.Any())
+                    return lstAdminEmails;
+                else
+                    return null;
+            }
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+
     public async Task<IEnumerable<RolesDTO>> GetAllRoles()
     {
         try
