@@ -15,25 +15,30 @@ public class EmailService : IEmailService
     {
         _emailSettings = emailSettings;
     }
-    
-    public async Task SendEmail(string from, string to, string subject, string body)
+
+    public async Task SendEmail(string to, string subject, EmailDTO body)
     {
         MailMessage mm = new MailMessage();
-        mm.Body = GetEmailTemplate();
+        mm.Body = GetEmailTemplate(body);
         mm.Subject = subject;
         mm.IsBodyHtml = true;
         mm.To.Add(to);
-        mm.From = new MailAddress(from);
+        mm.From = new MailAddress("");
         await _emailSettings.SendEmail(mm);
     }
 
-    private string GetEmailTemplate()
+    private string GetEmailTemplate(EmailDTO body)
     {
         string readText = File.ReadAllText("Email.html");
-        StringBuilder strBuilder = new StringBuilder();
-        StringBuilder strBuildeFinalr = new StringBuilder();
-
-        var htmlToSend = readText.Replace("{placeholder}", "");
+        var htmlToSend = readText.Replace("{PlaceholderCongrats}",body.PlaceholderCongrats)
+            .Replace("{PlaceholderName}", body.FullName)
+            .Replace("{PlaceholderEmail}", body.Email)
+            .Replace("{PlaceholderPhone}",body.Phone)
+            .Replace("{PlaceholderManager}",body.Manager)
+            .Replace("{PlaceholderDate}", body.CreatedDate.ToString())
+            .Replace("{PlaceholderMessage}", body.PlaceholderMessage)
+            .Replace("{PlaceholderButtonText}", body.PlaceholderButtonText)
+            .Replace("{PlaceholderView}",body.PlaceholderView);
         return htmlToSend;
     }
 

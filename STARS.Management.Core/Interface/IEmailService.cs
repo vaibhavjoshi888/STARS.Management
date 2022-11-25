@@ -8,7 +8,7 @@ namespace STARS.Management.Core.Interface;
 public interface IEmailService
 {
     
-   Task SendEmail(string from,string to, string subject, string body);
+   Task SendEmail(string to, string subject, EmailDTO body);
     
 }
 

@@ -13,21 +13,17 @@ public class UserManagementService : IUserManagementService
 
     private readonly IUserManagementRepository _userManagementRepository;
     private readonly ILDAPService _lDAPService;
-    private readonly IEmailService _emailService;
 
-    public UserManagementService(IUserManagementRepository userManagementRepository, ILDAPService lDAPService
-    ,IEmailService emailService)
+    public UserManagementService(IUserManagementRepository userManagementRepository, ILDAPService lDAPService)
     {
         _userManagementRepository = userManagementRepository;
         _lDAPService = lDAPService;
-        _emailService=emailService;
     }
 
     public void SaveUser(UserDTO user)
     {
         if (ValidateUser(user))
             _userManagementRepository.CreateUser(user);
-        _emailService.SendEmail(user.Email,user.ManagerEmail,"STar Email","First Email from Star");
     }
 
     public IEnumerable<UserDTO> GetAllUsers()
