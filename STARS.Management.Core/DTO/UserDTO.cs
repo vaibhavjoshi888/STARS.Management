@@ -24,6 +24,6 @@ public class UserDTO
     public string ThumbnailPhoto { get; set; }
     public int UserRoleId {get;set;}
     public string CreatedBy { get; set; }
-    public DateTime CreatedDate { get; set; }
+    public string CreatedDate { get; set; }
  
 }

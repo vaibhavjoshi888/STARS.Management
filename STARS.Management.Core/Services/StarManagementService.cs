@@ -87,6 +87,7 @@ public class StarManagementService : IStarManagementService
     public void SubmitStarRequest(UserStarConfigurationDTO userStarConfigurationDTO)
     {
         _starManagementRepository.SubmitStarRequest(userStarConfigurationDTO).GetAwaiter().GetResult();
+        userStarConfigurationDTO.CreatedDate=DateTime.Now.ToString();
         SendEmail(userStarConfigurationDTO);
     }
 
