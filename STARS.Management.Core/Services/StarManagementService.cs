@@ -86,6 +86,8 @@ public class StarManagementService : IStarManagementService
 
     public void SubmitStarRequest(UserStarConfigurationDTO userStarConfigurationDTO)
     {
+       var user= _lDAPService.GetUserFromAD(userStarConfigurationDTO.CreatedBy,false);
+       userStarConfigurationDTO.CreatedBy=user.FullName;
         _starManagementRepository.SubmitStarRequest(userStarConfigurationDTO).GetAwaiter().GetResult();
         userStarConfigurationDTO.CreatedDate=DateTime.Now.ToString();
         SendEmail(userStarConfigurationDTO);
