@@ -1,6 +1,6 @@
 IF EXISTS(SELECT * FROM SHareLikeHistoryCount WHERE UserStarId=@userstarid)
 BEGIN
- UPDATE SHareLikeHistoryCount SET LikeCount=LikeCount+1 WHERE UserStarId=@userstarid
+ UPDATE SHareLikeHistoryCount SET LikeCount=coalesce(LikeCount,0)+1 WHERE UserStarId=@userstarid
 END
 ELSE
 BEGIN 
