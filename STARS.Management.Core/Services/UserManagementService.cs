@@ -51,7 +51,7 @@ public class UserManagementService : IUserManagementService
         //         if (user != null)
         //         {
         //             SignedInUserDTO signedInUser = new SignedInUserDTO();
-        //             signedInUser.CorpUserId = string.Format(@"CORP\{0}", adUserInfo.CorpID);
+        //             signedInUser.CorpUserId =  adUserInfo.CorpID;
         //             signedInUser.DisplayName = adUserInfo.DisplayName;
         //             signedInUser.FirstName = adUserInfo.GivenName;
         //             signedInUser.LastName = adUserInfo.Surname;
@@ -69,7 +69,7 @@ public class UserManagementService : IUserManagementService
         //         else
         //         {
         //             SignedInUserDTO signedInUser = new SignedInUserDTO();
-        //             signedInUser.CorpUserId = string.Format(@"CORP\{0}", adUserInfo.CorpID);
+        //             signedInUser.CorpUserId = adUserInfo.CorpID;
         //             signedInUser.DisplayName = adUserInfo.DisplayName;
         //             signedInUser.FirstName = adUserInfo.GivenName;
         //             signedInUser.LastName = adUserInfo.Surname;
