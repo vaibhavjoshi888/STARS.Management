@@ -23,7 +23,7 @@ namespace STARS.Management.Controllers
         public ActionResult Get()
         {
 
-            var users = _UserManagementService.GetAllUsers();
+            var users = GetSampleData();
             if (users != null)
                 return Ok(users);
             return NotFound("Record Not Found");
