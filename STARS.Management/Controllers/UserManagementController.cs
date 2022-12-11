@@ -23,7 +23,7 @@ namespace STARS.Management.Controllers
         public ActionResult Get()
         {
 
-            var users = GetSampleData();
+            var users = _UserManagementService.GetAllUsers();
             if (users != null)
                 return Ok(users);
             return NotFound("Record Not Found");
@@ -33,7 +33,7 @@ namespace STARS.Management.Controllers
         [HttpGet("getuserdetails/{username}")]
         public ActionResult GetByUsername(string username)
         {
-            var users = _UserManagementService.GetAllUsers();
+            var users = GetSampleData(); //_UserManagementService.GetAllUsers();
             if (users != null)
                 return Ok(users);
 
@@ -53,7 +53,7 @@ namespace STARS.Management.Controllers
             if (userDto.Item1)
                 return BadRequest("Multiple login attempt failed try after sometime");
             else
-                 return BadRequest("Error with credential or user not found");
+                return BadRequest("Error with credential or user not found");
         }
 
         [HttpPost("user")]
