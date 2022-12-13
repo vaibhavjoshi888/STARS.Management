@@ -1,0 +1,1 @@
+ INSERT INTO EmailLogging values(@log,getdate())

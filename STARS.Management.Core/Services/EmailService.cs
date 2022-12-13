@@ -13,15 +13,18 @@ namespace STARS.Management.Core.Services;
 public class EmailService : IEmailService
 {
     private IEmailSettings _emailSettings;
+    private readonly IStarManagementRepository _starManagementRepository;
     
-    public EmailService(IEmailSettings emailSettings)
+    public EmailService(IEmailSettings emailSettings,IStarManagementRepository starManagementRepository)
     {
         _emailSettings = emailSettings;
+        _starManagementRepository=starManagementRepository;
      
     }
 
     public async Task SendEmail(string to, string subject, EmailDTO body)
     {
+      await  _starManagementRepository.InsertEmailLog("Call SenEmail Service");
         MailMessage mm = new MailMessage();
         mm.Body = GetEmailTemplate(body);
         mm.Subject = subject;

@@ -14,6 +14,7 @@ public interface IStarManagementRepository
     public  Task UpdateStarShareCountCount(string userstarid);
     public  Task UpdateStarLikeCount(string userstarid);
     public  Task<IEnumerable<RecentStarsDTO>> GetRecentStar();
+    public  Task InsertEmailLog(string log);
 
 }
 

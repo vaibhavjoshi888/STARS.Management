@@ -30,6 +30,8 @@
  <EmbeddedResource Include="StarManagement\SQL\updatel_star_share.sql" />
 
  <EmbeddedResource Include="StarManagement\SQL\get_recent_star.sql" />
+ 
+ <EmbeddedResource Include="StarManagement\SQL\insert_email_log.sql" />
 
  
 

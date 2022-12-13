@@ -194,4 +194,23 @@ public class StarManagementRepository : IStarManagementRepository
         }
     }
 
+    public async Task InsertEmailLog(string log)
+    {
+        try
+        {
+            var queryAppUser = _QueryProviderService.GetQuery(StarSqlList.Insert_email_log);
+            var parameters = new DynamicParameters();
+            parameters.Add("log", log, DbType.String);
+
+            using (var connection = _context.CreateConnection())
+            {
+                var identity = await connection.ExecuteAsync(queryAppUser, parameters);
+            }
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+
 }

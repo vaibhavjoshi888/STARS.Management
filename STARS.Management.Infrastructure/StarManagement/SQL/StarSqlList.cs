@@ -13,4 +13,7 @@ public static class StarSqlList
     
     internal static string Get_recent_star { get => $"{_Namespace}.get_recent_star.sql"; }
     
+    internal static string Insert_email_log { get => $"{_Namespace}.insert_email_log.sql"; }
+    
+    
 }
