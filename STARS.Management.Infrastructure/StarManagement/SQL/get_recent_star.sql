@@ -1,4 +1,4 @@
-SELECT TOP (6) UserStarId AS UserStarId,
+SELECT UserStarId AS UserStarId,
  CorpUserId AS CorpUserId,
   EmployeeName AS EmployeeName,
    Message as Message,
