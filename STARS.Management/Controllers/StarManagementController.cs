@@ -51,7 +51,7 @@ namespace STARS.Management.Controllers
         [HttpGet("getrecentstars")]
         public ActionResult GetRecentStars()
         {
-            var stars = _StarManagementService.GetRecentStar();
+            var stars = GetRecentStarDto();
             return Ok(stars);
         }
 
